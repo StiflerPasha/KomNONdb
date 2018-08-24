@@ -70,44 +70,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(getApplicationContext(), "Заполните все поля!", Toast.LENGTH_LONG).show();
             
         } else {
-            double hw1 = Double.parseDouble(hwPr.getText().toString());
-            double hw2 = Double.parseDouble(hw.getText().toString());
+            int hw1 = Integer.parseInt(hwPr.getText().toString());
+            int hw2 = Integer.parseInt(hw.getText().toString());
             double resultHW = (hw2 - hw1) * HW_KEF;
             BigDecimal hw = new BigDecimal(resultHW);
             hw = hw.setScale(2, BigDecimal.ROUND_HALF_UP);
             textResultHW.setText(hw + " / " + (hw2 - hw1));
 
-            double cw1 = Double.parseDouble(cwPr.getText().toString());
-            double cw2 = Double.parseDouble(cw.getText().toString());
+            int cw1 = Integer.parseInt(cwPr.getText().toString());
+            int cw2 = Integer.parseInt(cw.getText().toString());
             double resultCW = (cw2 - cw1) * CW_KEF;
             BigDecimal cw = new BigDecimal(resultCW);
             cw = cw.setScale(2, BigDecimal.ROUND_HALF_UP);
             textResultCW.setText(cw + " / " + (cw2 - cw1));
 
-            double resWof = (hw2 - hw1) + (cw2 - cw1);
+            int resWof = (hw2 - hw1) + (cw2 - cw1);
             double resultWof = resWof * WOF_KEF;
             BigDecimal wof = new BigDecimal(resultWof);
             wof = wof.setScale(2, BigDecimal.ROUND_HALF_UP);
             textResultWof.setText(wof + " / " + resWof);
 
-            double elPr1 = Double.parseDouble(t1Pr.getText().toString());
-            double el1 = Double.parseDouble(t1.getText().toString());
-            double resT1 = el1 - elPr1;
+            int elPr1 = Integer.parseInt(t1Pr.getText().toString());
+            int el1 = Integer.parseInt(t1.getText().toString());
+            int resT1 = el1 - elPr1;
             double resultT1 = resT1 * T1_KEF;
 
-            double elPr2 = Double.parseDouble(t2Pr.getText().toString());
-            double el2 = Double.parseDouble(t2.getText().toString());
-            double resT2 = el2 - elPr2;
+            int elPr2 = Integer.parseInt(t2Pr.getText().toString());
+            int el2 = Integer.parseInt(t2.getText().toString());
+            int resT2 = el2 - elPr2;
             double resultT2 = resT2 * T2_KEF;
 
-            double elPr3 = Double.parseDouble(t3Pr.getText().toString());
-            double el3 = Double.parseDouble(t3.getText().toString());
-            double resT3 = el3 - elPr3;
+            int elPr3 = Integer.parseInt(t3Pr.getText().toString());
+            int el3 = Integer.parseInt(t3.getText().toString());
+            int resT3 = el3 - elPr3;
             double resultT3 = resT3 * T3_KEF;
 
             double resultElectr = resultT1 + resultT2 + resultT3;
             textResultElectr.setText(resultElectr +
-                    " /* " + resT1 + "/" + resT2 + "/" + resT3 + " */");
+                    "   /* " + resT1 + " / " + resT2 + " / " + resT3 + " */");
 
             double resultAll = resultHW + resultCW + resultElectr + resultWof + PHONE_KEF;
             BigDecimal all = new BigDecimal(resultAll);

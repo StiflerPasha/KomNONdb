@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">KomNONdb</string>
+    <string name="textPrev">Предыдущий месяц</string>
+    <string name="textHW">Горячая вода</string>
+    <string name="textCW">Холодная вода</string>
+    <string name="textElectric">Электричество</string>
+    <string name="t1">T1</string>
+    <string name="t2">T2</string>
+    <string name="t3">T3</string>
+    <string name="textPres">Текущий меcяц</string>
+    <string name="textResult">Результат</string>
+</resources>

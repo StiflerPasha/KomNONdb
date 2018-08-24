@@ -9,4 +9,6 @@
     <string name="t3">T3</string>
     <string name="textPres">Текущий меcяц</string>
     <string name="textResult">Результат</string>
+    <string name="all">Итого</string>
+    <string name="textWof">Водоотвод</string>
 </resources>

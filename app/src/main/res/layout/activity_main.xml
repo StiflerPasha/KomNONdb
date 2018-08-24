@@ -200,7 +200,7 @@
         android:hint="@string/t1"
         android:inputType="number"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_green_dark"
+        android:textColor="#4c7100"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -217,7 +217,7 @@
         android:hint="@string/t2"
         android:inputType="number"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_green_dark"
+        android:textColor="#4c7100"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/etT3"
         app:layout_constraintStart_toEndOf="@+id/etT1"
@@ -234,7 +234,7 @@
         android:hint="@string/t3"
         android:inputType="number"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_green_dark"
+        android:textColor="#4c7100"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -250,7 +250,7 @@
         android:hint="Г/в"
         android:inputType="number"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_green_dark"
+        android:textColor="#4c7100"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -266,7 +266,7 @@
         android:hint="Х/в"
         android:inputType="number"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_green_dark"
+        android:textColor="#4c7100"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
@@ -307,9 +307,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:layout_marginStart="8dp"
-        android:text=""
+        android:text="@string/textCW"
         android:textColor="@android:color/holo_orange_dark"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/textResultWof"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -319,9 +319,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
-        android:text=""
-        android:textColor="#487fc7"
-        android:textSize="12sp"
+        android:text="@string/all"
+        android:textColor="#5796e8"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -329,12 +329,12 @@
         android:id="@+id/textResultElectr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:text=""
+        android:text="@string/textElectric"
         android:textColor="@android:color/holo_orange_dark"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnResult"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -343,9 +343,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:layout_marginStart="8dp"
-        android:text=""
+        android:text="@string/textWof"
         android:textColor="@android:color/holo_orange_dark"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/textResultElectr"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -355,9 +355,26 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:layout_marginStart="8dp"
-        android:text=""
+        android:text="@string/textHW"
         android:textColor="@android:color/holo_orange_dark"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/textResultCW"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textPersonal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text=""
+        android:textColor="#781b1b"
+        android:textSize="28sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/textResultHW"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etT2" />
 </android.support.constraint.ConstraintLayout>

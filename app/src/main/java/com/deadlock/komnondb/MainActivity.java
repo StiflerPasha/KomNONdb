@@ -20,9 +20,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final static double T2_KEF = 1.92;
     final static double T3_KEF = 5.38;
     final static double WOF_KEF = 25.12;
-    final static double PHONE_KEF = 205.00;
+    final static int PHONE_KEF = 205;
+    final static int HOUSE_KEF = 35000;
 
-    TextView textResultHW, textResultCW, textResultElectr, textResultWof, textResultAll;
+    TextView textResultHW, textResultCW, textResultElectr, textResultWof,
+            textResultAll, textPersonal;
     Button btnResult;
     EditText hwPr, cwPr, t1Pr, t2Pr, t3Pr, hw, cw, t1, t2, t3;
 
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textResultWof = findViewById(R.id.textResultWof);
         textResultElectr = findViewById(R.id.textResultElectr);
         textResultAll = findViewById(R.id.textResultAll);
+        textPersonal = findViewById(R.id.textPersonal);
 
         btnResult = findViewById(R.id.btnResult);
         btnResult.setOnClickListener(this);
@@ -75,20 +78,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             double resultHW = (hw2 - hw1) * HW_KEF;
             BigDecimal hw = new BigDecimal(resultHW);
             hw = hw.setScale(2, BigDecimal.ROUND_HALF_UP);
-            textResultHW.setText(hw + " / " + (hw2 - hw1));
+            textResultHW.setText("Горячая вода    -->    " + (hw2 - hw1) + "л     --> Сумма: " + hw + "руб");
 
             int cw1 = Integer.parseInt(cwPr.getText().toString());
             int cw2 = Integer.parseInt(cw.getText().toString());
             double resultCW = (cw2 - cw1) * CW_KEF;
             BigDecimal cw = new BigDecimal(resultCW);
             cw = cw.setScale(2, BigDecimal.ROUND_HALF_UP);
-            textResultCW.setText(cw + " / " + (cw2 - cw1));
+            textResultCW.setText("Холодная вода -->    " + (cw2 - cw1) + "л     --> Сумма: " + cw + "руб");
 
             int resWof = (hw2 - hw1) + (cw2 - cw1);
             double resultWof = resWof * WOF_KEF;
             BigDecimal wof = new BigDecimal(resultWof);
             wof = wof.setScale(2, BigDecimal.ROUND_HALF_UP);
-            textResultWof.setText(wof + " / " + resWof);
+            textResultWof.setText("Водоотвод         -->    " + resWof + "л     --> Сумма: " + wof + "руб");
 
             int elPr1 = Integer.parseInt(t1Pr.getText().toString());
             int el1 = Integer.parseInt(t1.getText().toString());
@@ -106,13 +109,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             double resultT3 = resT3 * T3_KEF;
 
             double resultElectr = resultT1 + resultT2 + resultT3;
-            textResultElectr.setText(resultElectr +
-                    "   /* " + resT1 + " / " + resT2 + " / " + resT3 + " */");
+            BigDecimal el = new BigDecimal(resultElectr);
+            el = el.setScale(2, BigDecimal.ROUND_HALF_UP);
+            textResultElectr.setText("Электричество --> " + resT1 + "|" + resT2 + "|" + resT3 + " --> Сумма: " + el + "руб");
 
             double resultAll = resultHW + resultCW + resultElectr + resultWof + PHONE_KEF;
             BigDecimal all = new BigDecimal(resultAll);
             all = all.setScale(2, BigDecimal.ROUND_HALF_UP);
-            textResultAll.setText("" + all);
+            textResultAll.setText("Итого: " + all);
+
+            double peronal = (resultAll + HOUSE_KEF) / 3;
+            BigDecimal pers = new BigDecimal(peronal);
+            pers = pers.setScale(2, BigDecimal.ROUND_HALF_UP);
+            textPersonal.setText(pers + "руб");
         }
 
     }

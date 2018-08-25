@@ -1,6 +1,7 @@
 package com.deadlock.komnondb;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,6 +23,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final static double WOF_KEF = 25.12;
     final static int PHONE_KEF = 205;
     final static int HOUSE_KEF = 35000;
+
+    final String SAVED_HW = "saved_hw";
+    final String SAVED_CW = "saved_cw";
+    final String SAVED_T1 = "saved_t1";
+    final String SAVED_T2 = "saved_t2";
+    final String SAVED_T3 = "saved_t3";
+
+    SharedPreferences sPref;
 
     TextView textResultHW, textResultCW, textResultElectr, textResultWof,
             textResultAll, textPersonal;
@@ -53,8 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         t1 = findViewById(R.id.etT1);
         t2 = findViewById(R.id.etT2);
         t3 = findViewById(R.id.etT3);
-    }
 
+        load();
+    }
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -123,6 +133,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             pers = pers.setScale(2, BigDecimal.ROUND_HALF_UP);
             textPersonal.setText(pers + "руб");
         }
+    }
 
+    void save() {
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString(SAVED_HW, hw.getText().toString());
+        ed.putString(SAVED_CW, cw.getText().toString());
+        ed.putString(SAVED_T1, t1.getText().toString());
+        ed.putString(SAVED_T2, t2.getText().toString());
+        ed.putString(SAVED_T3, t3.getText().toString());
+        ed.commit();
+    }
+
+    void load() {
+        sPref = getPreferences(MODE_PRIVATE);
+        String savedHW = sPref.getString(SAVED_HW, "");
+        String savedCW = sPref.getString(SAVED_CW, "");
+        String savedT1 = sPref.getString(SAVED_T1, "");
+        String savedT2 = sPref.getString(SAVED_T2, "");
+        String savedT3 = sPref.getString(SAVED_T3, "");
+        hwPr.setText(savedHW);
+        cwPr.setText(savedCW);
+        t1Pr.setText(savedT1);
+        t2Pr.setText(savedT2);
+        t3Pr.setText(savedT3);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        save();
     }
 }

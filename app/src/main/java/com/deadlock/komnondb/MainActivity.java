@@ -1,7 +1,6 @@
 package com.deadlock.komnondb;
 
 import android.annotation.SuppressLint;
-import android.content.SearchRecentSuggestionsProvider;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,12 +15,12 @@ import java.math.BigDecimal;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    final static double HW_KEF = 180.57;
-    final static double CW_KEF = 35.40;
+    final static double HW_KEF = 188.53;
+    final static double CW_KEF = 38.06;
     final static double T1_KEF = 6.46;
     final static double T2_KEF = 1.92;
     final static double T3_KEF = 5.38;
-    final static double WOF_KEF = 25.12;
+    final static double WOF_KEF = 27.01;
     final static int PHONE_KEF = 205;
     final static int HOUSE_KEF = 35000;
 

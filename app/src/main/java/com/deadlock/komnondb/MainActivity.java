@@ -1,6 +1,7 @@
 package com.deadlock.komnondb;
 
 import android.annotation.SuppressLint;
+import android.content.SearchRecentSuggestionsProvider;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final String SAVED_T2 = "saved_t2";
     final String SAVED_T3 = "saved_t3";
 
+    final String result = "Результат";
+    final String exit = "Сохранить и выйти";
+
     SharedPreferences sPref;
 
     TextView textResultHW, textResultCW, textResultElectr, textResultWof,
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnResult = findViewById(R.id.btnResult);
         btnResult.setOnClickListener(this);
+        btnResult.setText(result);
 
         hwPr = findViewById(R.id.etHWpr);
         cwPr = findViewById(R.id.etCWpr);
@@ -69,6 +74,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View view) {
+
+        if (btnResult.getText().equals(exit)) {
+            save();
+            finish();
+        }
 
         if (TextUtils.isEmpty(hwPr.getText().toString()) ||
                 TextUtils.isEmpty(hw.getText().toString()) ||
@@ -132,6 +142,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             BigDecimal pers = new BigDecimal(peronal);
             pers = pers.setScale(2, BigDecimal.ROUND_HALF_UP);
             textPersonal.setText(pers + "руб");
+
+            btnResult.setText(exit);
         }
     }
 
@@ -143,6 +155,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ed.putString(SAVED_T1, t1.getText().toString());
         ed.putString(SAVED_T2, t2.getText().toString());
         ed.putString(SAVED_T3, t3.getText().toString());
+        ed.commit();
+    }
+
+    void savePrev() {
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString(SAVED_HW, hwPr.getText().toString());
+        ed.putString(SAVED_CW, cwPr.getText().toString());
+        ed.putString(SAVED_T1, t1Pr.getText().toString());
+        ed.putString(SAVED_T2, t2Pr.getText().toString());
+        ed.putString(SAVED_T3, t3Pr.getText().toString());
         ed.commit();
     }
 
@@ -163,6 +186,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        save();
+        if (TextUtils.isEmpty(hw.getText().toString()) ||
+                TextUtils.isEmpty(cw.getText().toString()) ||
+                TextUtils.isEmpty(t1.getText().toString()) ||
+                TextUtils.isEmpty(t2.getText().toString()) ||
+                TextUtils.isEmpty(t3.getText().toString())) {
+            savePrev();
+        } else {
+            save();
+        }
     }
 }

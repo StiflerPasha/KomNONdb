@@ -15,14 +15,14 @@ import java.math.BigDecimal;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    final static double HW_KEF = 188.53;
-    final static double CW_KEF = 38.06;
-    final static double T1_KEF = 6.46;
-    final static double T2_KEF = 1.92;
-    final static double T3_KEF = 5.38;
-    final static double WOF_KEF = 27.01;
-    final static int PHONE_KEF = 205;
-    final static int HOUSE_KEF = 35000;
+    final double HW_KEF = 188.53;
+    final double CW_KEF = 38.06;
+    final double T1_KEF = 6.46;
+    final double T2_KEF = 1.92;
+    final double T3_KEF = 5.38;
+    final double WOF_KEF = 27.01;
+    final int PHONE_KEF = 205;
+    final int HOUSE_KEF = 35000;
 
     final String SAVED_HW = "saved_hw";
     final String SAVED_CW = "saved_cw";

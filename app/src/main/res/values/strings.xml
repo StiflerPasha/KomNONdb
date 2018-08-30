@@ -13,4 +13,6 @@
     <string name="textWof">Водоотвод</string>
     <string name="HW">Г/в</string>
     <string name="CW">Х/в</string>
+    <string name="textTel">Телефон</string>
+    <string name="textKvart">Квартплата</string>
 </resources>

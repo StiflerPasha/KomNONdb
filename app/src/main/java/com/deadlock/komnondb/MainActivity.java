@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 TextUtils.isEmpty(t3Pr.getText().toString()) ||
                 TextUtils.isEmpty(t3.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Заполните все поля!", Toast.LENGTH_LONG).show();
-            
+
         } else {
             int hw1 = Integer.parseInt(hwPr.getText().toString());
             int hw2 = Integer.parseInt(hw.getText().toString());

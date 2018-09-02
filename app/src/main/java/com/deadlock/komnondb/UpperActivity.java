@@ -6,10 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class UpperActivity extends Activity implements View.OnClickListener {
 
-    Button btnPokaz, btnSet;
+    ImageButton btnPokaz, btnSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

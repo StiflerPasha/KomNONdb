@@ -25,7 +25,7 @@
             android:label="@string/btnPokaz" />
         <activity
             android:name=".PrefActivity"
-            android:label="@string/btnSet" />
+            android:label="@string/btnSet"/>
     </application>
 
 </manifest>

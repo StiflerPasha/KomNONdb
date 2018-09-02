@@ -1,16 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="notif"
-        android:summary="Enable notifications"
-        android:title="Notifications" />
     <EditTextPreference
-        android:defaultValue="address"
-        android:key="Address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:defaultValue="188.53"
+        android:inputType="numberDecimal"
+        android:key="hwSet"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:summary="Address for for notifications"
-        android:title="Edit text preference" />
+        android:summary="Изменить коэфициент"
+        android:textSize="18sp"
+        android:title="Горячая вода" />
+    <EditTextPreference
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:defaultValue="38.06"
+        android:inputType="numberDecimal"
+        android:key="cwSet"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Изменить коэфициент"
+        android:textSize="18sp"
+        android:title="Холодная вода" />
+    <EditTextPreference
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:defaultValue="6.46"
+        android:inputType="numberDecimal"
+        android:key="t1Set"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Изменить коэфициент"
+        android:textSize="18sp"
+        android:title="T1" />
+    <EditTextPreference
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:defaultValue="1.92"
+        android:inputType="numberDecimal"
+        android:key="t2Set"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Изменить коэфициент"
+        android:textSize="18sp"
+        android:title="T2" />
+    <EditTextPreference
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:defaultValue="5.38"
+        android:inputType="numberDecimal"
+        android:key="t3Set"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Изменить коэфициент"
+        android:textSize="18sp"
+        android:title="T3" />
+    <EditTextPreference
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:defaultValue="25.12"
+        android:inputType="numberDecimal"
+        android:key="wofSet"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Изменить коэфициент"
+        android:textSize="18sp"
+        android:title="Водоотвод" />
+    <EditTextPreference
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:defaultValue="205"
+        android:inputType="numberDecimal"
+        android:key="phoneSet"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Изменить платеж"
+        android:textSize="18sp"
+        android:title="Телефон" />
+    <EditTextPreference
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:defaultValue="35000"
+        android:inputType="numberDecimal"
+        android:key="houseSet"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Изменить платеж"
+        android:textSize="18sp"
+        android:title="Квартплата" />
+    <EditTextPreference
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:defaultValue="3"
+        android:inputType="number"
+        android:key="personsSet"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Изменить"
+        android:textSize="18sp"
+        android:title="Количество человек" />
 </PreferenceScreen>

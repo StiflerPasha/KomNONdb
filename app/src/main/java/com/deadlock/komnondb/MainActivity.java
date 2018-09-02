@@ -15,15 +15,15 @@ import java.math.BigDecimal;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    String SAVED_HW_KEF = "saved_hw_kef";
-    String SAVED_CW_KEF = "saved_cw_kef";
-    String SAVED_T1_KEF = "saved_t1_kef";
-    String SAVED_T2_KEF = "saved_t2_kef";
-    String SAVED_T3_KEF = "saved_t3_kef";
-    String SAVED_WOF_KEF = "saved_wof_kef";
-    String SAVED_PHONE_KEF = "saved_phone_kef";
-    String SAVED_HOUSE_KEF = "saved_house_kef";
-    String SAVED_PERSONS_KEF = "saved_persons_kef";
+    float HW_KEF = 1.0f;
+    float CW_KEF = 1.0f;
+    float T1_KEF = 1.0f;
+    float T2_KEF = 1.0f;
+    float T3_KEF = 1.0f;
+    float WOF_KEF = 1.0f;
+    float PHONE_KEF = 1.0f;
+    int PERSONS_KEF = 1;
+    float HOUSE_KEF= 1.0f;
 
     final String SAVED_HW = "saved_hw";
     final String SAVED_CW = "saved_cw";
@@ -79,30 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         t2 = findViewById(R.id.etT2);
         t3 = findViewById(R.id.etT3);
 
-        Intent intent = getIntent();
-        float HW_KEF = intent.getFloatExtra("hwKef", 1.0f);
-        float CW_KEF = intent.getFloatExtra("cwKef", 1.0f);
-        float WOF_KEF = intent.getFloatExtra("wofKef", 1.0f);
-        float T1_KEF = intent.getFloatExtra("T1Kef", 1.0f);
-        float T2_KEF = intent.getFloatExtra("T2Kef", 1.0f);
-        float T3_KEF = intent.getFloatExtra("T3Kef", 1.0f);
-        float PHONE_KEF = intent.getFloatExtra("phoneKef", 1.0f);
-        float HOUSE_KEF = intent.getFloatExtra("houseKef", 1.0f);
-        int PERSONS_KEF = intent.getIntExtra("personsKef", 1);
-
-        sPref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.putFloat(SAVED_HW_KEF, HW_KEF);
-        ed.putFloat(SAVED_CW_KEF, CW_KEF);
-        ed.putFloat(SAVED_WOF_KEF, WOF_KEF);
-        ed.putFloat(SAVED_T1_KEF, T1_KEF);
-        ed.putFloat(SAVED_T2_KEF, T2_KEF);
-        ed.putFloat(SAVED_T3_KEF, T3_KEF);
-        ed.putFloat(SAVED_PHONE_KEF, PHONE_KEF);
-        ed.putFloat(SAVED_HOUSE_KEF, HOUSE_KEF);
-        ed.putInt(SAVED_PERSONS_KEF, PERSONS_KEF);
-        ed.commit();
-
         load();
     }
 
@@ -130,13 +106,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(getApplicationContext(), "Заполните все поля!", Toast.LENGTH_LONG).show();
 
         } else {
-            //Intent intent = getIntent();
-            sPref = getPreferences(MODE_PRIVATE);
 
             int hw1 = Integer.parseInt(hwPr.getText().toString());
             int hw2 = Integer.parseInt(hw.getText().toString());
-            //float HW_KEF = intent.getFloatExtra("hwKef", 1.0f);
-            float HW_KEF = sPref.getFloat(SAVED_HW_KEF, 1.0f);
             int resHW = hw2 - hw1;
             double resultHW = resHW * HW_KEF;
             BigDecimal hw = new BigDecimal(resultHW);
@@ -147,8 +119,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             int cw1 = Integer.parseInt(cwPr.getText().toString());
             int cw2 = Integer.parseInt(cw.getText().toString());
-            //float CW_KEF = intent.getFloatExtra("cwKef", 1.0f);
-            float CW_KEF = sPref.getFloat(SAVED_CW_KEF, 1.0f);
             int resCW = cw2 - cw1;
             double resultCW = resCW * CW_KEF;
             BigDecimal cw = new BigDecimal(resultCW);
@@ -157,8 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             litrCW.setText(resCW + "л");
             sumCW.setText(cw + " руб");
 
-            //float WOF_KEF = intent.getFloatExtra("wofKef", 1.0f);
-            float WOF_KEF = sPref.getFloat(SAVED_WOF_KEF, 1.0f);
             int resWof = (hw2 - hw1) + (cw2 - cw1);
             double resultWof = resWof * WOF_KEF;
             BigDecimal wof = new BigDecimal(resultWof);
@@ -169,22 +137,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             int elPr1 = Integer.parseInt(t1Pr.getText().toString());
             int el1 = Integer.parseInt(t1.getText().toString());
-            //float T1_KEF = intent.getFloatExtra("T1Kef", 1.0f);
-            float T1_KEF = sPref.getFloat(SAVED_T1_KEF, 1.0f);
             int resT1 = el1 - elPr1;
             double resultT1 = resT1 * T1_KEF;
 
             int elPr2 = Integer.parseInt(t2Pr.getText().toString());
             int el2 = Integer.parseInt(t2.getText().toString());
-            //float T2_KEF = intent.getFloatExtra("T2Kef", 1.0f);
-            float T2_KEF = sPref.getFloat(SAVED_T2_KEF, 1.0f);
             int resT2 = el2 - elPr2;
             double resultT2 = resT2 * T2_KEF;
 
             int elPr3 = Integer.parseInt(t3Pr.getText().toString());
             int el3 = Integer.parseInt(t3.getText().toString());
-            //float T3_KEF = intent.getFloatExtra("T3Kef", 1.0f);
-            float T3_KEF = sPref.getFloat(SAVED_T3_KEF, 1.0f);
             int resT3 = el3 - elPr3;
             double resultT3 = resT3 * T3_KEF;
 
@@ -195,17 +157,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             litrEl.setText(resT1 + "|" + resT2 + "|" + resT3);
             sumEl.setText(el + " руб");
 
-            //float PHONE_KEF = intent.getFloatExtra("phoneKef", 1.0f);
-            float PHONE_KEF = sPref.getFloat(SAVED_PHONE_KEF, 1.0f);
             double resultAll = resultHW + resultCW + resultElectr + resultWof + PHONE_KEF;
             BigDecimal all = new BigDecimal(resultAll);
             all = all.setScale(2, BigDecimal.ROUND_HALF_UP);
             textResultAll.setText(all + " руб");
 
-            //float HOUSE_KEF = intent.getFloatExtra("houseKef", 1.0f);
-            //int PERSONS_KEF = intent.getIntExtra("personsKef", 1);
-            float HOUSE_KEF = sPref.getFloat(SAVED_HOUSE_KEF, 1.0f);
-            int PERSONS_KEF = sPref.getInt(SAVED_PERSONS_KEF, 1);
             double peronal = (resultAll + HOUSE_KEF) / PERSONS_KEF;
             BigDecimal pers = new BigDecimal(peronal);
             pers = pers.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -250,22 +206,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         t2Pr.setText(savedT2);
         t3Pr.setText(savedT3);
     }
-
-    /*void loadSettings() {
-        sPref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.putFloat(SAVED_HW_KEF, HW_KEF);
-        ed.putFloat(SAVED_CW_KEF, CW_KEF);
-        ed.putFloat(SAVED_WOF_KEF, WOF_KEF);
-        ed.putFloat(SAVED_T1_KEF, T1_KEF);
-        ed.putFloat(SAVED_T2_KEF, T2_KEF);
-        ed.putFloat(SAVED_T3_KEF, T3_KEF);
-        ed.putFloat(SAVED_PHONE_KEF, PHONE_KEF);
-        ed.putFloat(SAVED_HOUSE_KEF, HOUSE_KEF);
-        ed.putInt(SAVED_PERSONS_KEF, PERSONS_KEF);
-        ed.commit();
-
-    }*/
 
     @Override
     protected void onDestroy() {

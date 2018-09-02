@@ -13,4 +13,6 @@
     <string name="textWof">Водоотвод</string>
     <string name="HW">Г/в</string>
     <string name="CW">Х/в</string>
+    <string name="btnPokaz">Показания</string>
+    <string name="btnSet">Настройки</string>
 </resources>

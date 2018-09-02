@@ -30,7 +30,7 @@ public class UpperActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
                 break;
             case R.id.btnSet:
-                intent = new Intent(this, KoefActivity.class);
+                intent = new Intent(this, PrefActivity.class);
                 startActivity(intent);
                 break;
         }

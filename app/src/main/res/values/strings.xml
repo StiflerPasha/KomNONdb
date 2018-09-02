@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">KomNONdb</string>
-    <string name="settings">Коефициенты</string>
     <string name="textPrev">Предыдущий месяц</string>
     <string name="textHW">Горячая вода</string>
     <string name="textCW">Холодная вода</string>
@@ -14,8 +13,4 @@
     <string name="textWof">Водоотвод</string>
     <string name="HW">Г/в</string>
     <string name="CW">Х/в</string>
-    <string name="textTel">Телефон</string>
-    <string name="textKvart">Квартплата</string>
-    <string name="btnPokaz">Показания</string>
-    <string name="btnSet">Настройки</string>
 </resources>

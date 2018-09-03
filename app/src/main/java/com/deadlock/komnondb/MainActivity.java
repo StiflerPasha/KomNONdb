@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -28,6 +28,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     
     int PERSONS_KEF;
 
+    String[] monthNames = { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
+            "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
+
     final String SAVED_HW = "saved_hw";
     final String SAVED_CW = "saved_cw";
     final String SAVED_T1 = "saved_t1";
@@ -41,12 +44,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     TextView textResultHW, textResultCW, textResultElectr, textResultWof,
             textResultAll, textPersonal, litrHW, litrCW, litrWof, litrEl,
-            sumHW, sumCW, sumWof, sumEl;
+            sumHW, sumCW, sumWof, sumEl, prevMonth, presMonth;
 
     Button btnResult;
 
     EditText hwPr, cwPr, t1Pr, t2Pr, t3Pr, hw, cw, t1, t2, t3;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +72,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         sumCW = findViewById(R.id.sumCW);
         sumWof = findViewById(R.id.sumWof);
         sumEl = findViewById(R.id.sumEl);
+
+        prevMonth = findViewById(R.id.prevMonth);
+        presMonth = findViewById(R.id.presMonth);
 
         btnResult = findViewById(R.id.btnResult);
         btnResult.setOnClickListener(this);
@@ -94,6 +101,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         HOUSE_KEF = Float.parseFloat(sp.getString("houseSet", "35000.0"));
         PERSONS_KEF = Integer.parseInt(sp.getString("personsSet", "3"));
 
+        Calendar calendar = Calendar.getInstance();
+        presMonth.setText(monthNames[calendar.get(Calendar.MONTH)]);
+        prevMonth.setText(monthNames[calendar.get(Calendar.MONTH) - 1]);
 
         load();
     }

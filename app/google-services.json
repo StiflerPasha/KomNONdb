@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "913663004742",
+    "firebase_url": "https://komunalka-87575.firebaseio.com",
+    "project_id": "komunalka-87575",
+    "storage_bucket": "komunalka-87575.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913663004742:android:f95d864c6085d98f",
+        "android_client_info": {
+          "package_name": "com.deadlock.komnondb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913663004742-84se2lbe6jnhcn6u50fbm2bmome5d736.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deadlock.komnondb",
+            "certificate_hash": "519e533ca1887f8c2ac47bc9f59570ecb843baf4"
+          }
+        },
+        {
+          "client_id": "913663004742-90gkffei0ebpt8jourdo80km74cgd99e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXt4fUmkV68i1ZhPhPsMHdOlZJEuWKOUA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913663004742-90gkffei0ebpt8jourdo80km74cgd99e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

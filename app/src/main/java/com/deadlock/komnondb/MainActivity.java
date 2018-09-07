@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -51,12 +52,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             sumHW, sumCW, sumWof, sumEl, prevMonth, presMonth;
 
     Button btnResult;
-    Button btnAdd;
 
     EditText hwPr, cwPr, t1Pr, t2Pr, t3Pr, hw, cw, t1, t2, t3;
 
     FirebaseDatabase database;
     DatabaseReference reference;
+
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -88,21 +90,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnResult.setOnClickListener(this);
         btnResult.setText(result);
 
-        database = FirebaseDatabase.getInstance();
-        reference = database.getReference("Показания");
-
-        /*btnAdd = findViewById(R.id.btnAdd);
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String date = presMonth.getText().toString();
-                database = FirebaseDatabase.getInstance();
-                reference = database.getReference();
-                reference.child("Monthes").child(date).setValue(date);
-                addCounter();
-            }
-        });*/
-
         hwPr = findViewById(R.id.etHWpr);
         cwPr = findViewById(R.id.etCWpr);
         t1Pr = findViewById(R.id.etT1pr);
@@ -127,6 +114,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Calendar calendar = Calendar.getInstance();
         presMonth.setText(monthNames[calendar.get(Calendar.MONTH)]);
         prevMonth.setText(monthNames[calendar.get(Calendar.MONTH) - 1]);
+
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("users").child(mAuth.getUid()).child("Показания");
+
 
         load();
     }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,13 +14,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -110,17 +115,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         prevMonth.setText(monthNames[calendar.get(Calendar.MONTH) - 1]);
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("users").child(mAuth.getUid()).child("Показания");
+        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid())).child("Показания");
+
+        setCounters();
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View view) {
 
-        if (btnResult.getText().equals(exit)) {
+       /* if (btnResult.getText().equals(exit)) {
             finish();
             //finishAffinity();
-        }
+        }*/
 
         if (TextUtils.isEmpty(hwPr.getText().toString()) ||
                 TextUtils.isEmpty(hw.getText().toString()) ||
@@ -196,13 +203,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             pers = pers.setScale(2, BigDecimal.ROUND_HALF_UP);
             textPersonal.setText(pers + " руб");
 
-            addCounter();
+            saveCounter();
 
-            btnResult.setText(exit);
+            //btnResult.setText(exit);
         }
     }
 
-    private void addCounter() {
+    private void saveCounter() {
         String date = presMonth.getText().toString();
         String id = reference.child(date).getKey();
 
@@ -219,5 +226,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         counter.put(id, counterValues);
 
         reference.updateChildren(counter);
+    }
+
+    private void setCounters() {
+        String prevDate = prevMonth.getText().toString();
+        reference.child(prevDate).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Long hwFromDb = dataSnapshot.child("Горячая вода").getValue(Long.class);
+                Long cwFromDb = dataSnapshot.child("Холодная вода").getValue(Long.class);
+                Long t1FromDb = dataSnapshot.child("T1").getValue(Long.class);
+                Long t2FromDb = dataSnapshot.child("T2").getValue(Long.class);
+                Long t3FromDb = dataSnapshot.child("T3").getValue(Long.class);
+                hwPr.setText(hwFromDb != null ? hwFromDb.toString() : null);
+                cwPr.setText(cwFromDb != null ? cwFromDb.toString() : null);
+                t1Pr.setText(t1FromDb != null ? t1FromDb.toString() : null);
+                t2Pr.setText(t2FromDb != null ? t2FromDb.toString() : null);
+                t3Pr.setText(t3FromDb != null ? t3FromDb.toString() : null);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

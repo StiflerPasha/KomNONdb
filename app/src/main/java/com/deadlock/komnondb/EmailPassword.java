@@ -36,6 +36,8 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
         BTNsignIn = findViewById(R.id.btn_sign_in);
         BTNregistration.setOnClickListener(this);
         BTNsignIn.setOnClickListener(this);
+
+        String uui = mAuth.getUid();
     }
 
     @Override

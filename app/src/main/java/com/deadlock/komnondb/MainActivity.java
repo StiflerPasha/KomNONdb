@@ -1,10 +1,10 @@
 package com.deadlock.komnondb;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -12,10 +12,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     float HW_KEF,
             CW_KEF,
@@ -25,7 +30,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             WOF_KEF,
             PHONE_KEF,
             HOUSE_KEF;
-    
     int PERSONS_KEF;
 
     String[] monthNames = { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
@@ -47,8 +51,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
             sumHW, sumCW, sumWof, sumEl, prevMonth, presMonth;
 
     Button btnResult;
+    Button btnAdd;
 
     EditText hwPr, cwPr, t1Pr, t2Pr, t3Pr, hw, cw, t1, t2, t3;
+
+    FirebaseDatabase database;
+    DatabaseReference reference;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -79,6 +87,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btnResult = findViewById(R.id.btnResult);
         btnResult.setOnClickListener(this);
         btnResult.setText(result);
+
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("Показания");
+
+        /*btnAdd = findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String date = presMonth.getText().toString();
+                database = FirebaseDatabase.getInstance();
+                reference = database.getReference();
+                reference.child("Monthes").child(date).setValue(date);
+                addCounter();
+            }
+        });*/
 
         hwPr = findViewById(R.id.etHWpr);
         cwPr = findViewById(R.id.etCWpr);
@@ -114,7 +137,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         if (btnResult.getText().equals(exit)) {
             save();
-            finishAffinity();
+            finish();
+            //finishAffinity();
         }
 
         if (TextUtils.isEmpty(hwPr.getText().toString()) ||
@@ -191,6 +215,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
             pers = pers.setScale(2, BigDecimal.ROUND_HALF_UP);
             textPersonal.setText(pers + " руб");
 
+            addCounter();
+
             btnResult.setText(exit);
         }
     }
@@ -243,5 +269,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
         } else {
             save();
         }
+    }
+
+    private void addCounter() {
+        String date = presMonth.getText().toString();
+        String id = reference.child(date).getKey();
+
+        Counters newCounter = new Counters(
+                Integer.parseInt(hw.getText().toString()),
+                Integer.parseInt(cw.getText().toString()),
+                Integer.parseInt(t1.getText().toString()),
+                Integer.parseInt(t2.getText().toString()),
+                Integer.parseInt(t3.getText().toString()));
+
+        Map<String, Object> counterValues = newCounter.toMap();
+
+        Map<String, Object> counter = new HashMap<>();
+        counter.put(id, counterValues);
+
+        reference.updateChildren(counter);
     }
 }

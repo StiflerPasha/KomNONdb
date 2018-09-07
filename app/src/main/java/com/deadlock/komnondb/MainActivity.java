@@ -36,16 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[] monthNames = { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
             "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
 
-    final String SAVED_HW = "saved_hw";
-    final String SAVED_CW = "saved_cw";
-    final String SAVED_T1 = "saved_t1";
-    final String SAVED_T2 = "saved_t2";
-    final String SAVED_T3 = "saved_t3";
-
     final String result = "Результат";
     final String exit = "Сохранить и выйти";
 
-    SharedPreferences sPref, sp;
+    SharedPreferences sp;
 
     TextView textResultHW, textResultCW, textResultElectr, textResultWof,
             textResultAll, textPersonal, litrHW, litrCW, litrWof, litrEl,
@@ -117,9 +111,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("users").child(mAuth.getUid()).child("Показания");
-
-
-        load();
     }
 
     @SuppressLint("SetTextI18n")
@@ -127,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
 
         if (btnResult.getText().equals(exit)) {
-            save();
             finish();
             //finishAffinity();
         }
@@ -209,56 +199,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             addCounter();
 
             btnResult.setText(exit);
-        }
-    }
-
-    void save() {
-        sPref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.putString(SAVED_HW, hw.getText().toString());
-        ed.putString(SAVED_CW, cw.getText().toString());
-        ed.putString(SAVED_T1, t1.getText().toString());
-        ed.putString(SAVED_T2, t2.getText().toString());
-        ed.putString(SAVED_T3, t3.getText().toString());
-        ed.commit();
-    }
-
-    void savePrev() {
-        sPref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.putString(SAVED_HW, hwPr.getText().toString());
-        ed.putString(SAVED_CW, cwPr.getText().toString());
-        ed.putString(SAVED_T1, t1Pr.getText().toString());
-        ed.putString(SAVED_T2, t2Pr.getText().toString());
-        ed.putString(SAVED_T3, t3Pr.getText().toString());
-        ed.commit();
-    }
-
-    void load() {
-        sPref = getPreferences(MODE_PRIVATE);
-        String savedHW = sPref.getString(SAVED_HW, "");
-        String savedCW = sPref.getString(SAVED_CW, "");
-        String savedT1 = sPref.getString(SAVED_T1, "");
-        String savedT2 = sPref.getString(SAVED_T2, "");
-        String savedT3 = sPref.getString(SAVED_T3, "");
-        hwPr.setText(savedHW);
-        cwPr.setText(savedCW);
-        t1Pr.setText(savedT1);
-        t2Pr.setText(savedT2);
-        t3Pr.setText(savedT3);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (TextUtils.isEmpty(hw.getText().toString()) ||
-                TextUtils.isEmpty(cw.getText().toString()) ||
-                TextUtils.isEmpty(t1.getText().toString()) ||
-                TextUtils.isEmpty(t2.getText().toString()) ||
-                TextUtils.isEmpty(t3.getText().toString())) {
-            savePrev();
-        } else {
-            save();
         }
     }
 

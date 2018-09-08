@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 public class UpperActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton btnPokaz, btnSet;
+    Button btnTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,8 @@ public class UpperActivity extends AppCompatActivity implements View.OnClickList
         btnPokaz.setOnClickListener(this);
         btnSet = findViewById(R.id.btnSet);
         btnSet.setOnClickListener(this);
+        btnTable = findViewById(R.id.btnTable);
+        btnTable.setOnClickListener(this);
     }
 
     @Override
@@ -31,6 +35,10 @@ public class UpperActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnSet:
                 intent = new Intent(this, PrefActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btnTable:
+                intent = new Intent(this, TableActivity.class);
                 startActivity(intent);
                 break;
         }

@@ -23,7 +23,7 @@ public class Results {
         HashMap<String, Object> hashResults = new HashMap<>();
         hashResults.put("Горячая вода", hwResDb);
         hashResults.put("Холодная вода", cwResDb);
-        hashResults.put("Электичество", elResDb);
+        hashResults.put("Электричество", elResDb);
         hashResults.put("Водоотвод", wofResDb);
         hashResults.put("Всего", allResDb);
         return hashResults;

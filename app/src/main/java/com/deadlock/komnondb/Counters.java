@@ -19,13 +19,13 @@ public class Counters {
         this.t3Db = t3Db;
     }
 
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> hashResult = new HashMap<>();
-        hashResult.put("Горячая вода", hwDb);
-        hashResult.put("Холодная вода", cwDb);
-        hashResult.put("T1", t1Db);
-        hashResult.put("T2", t2Db);
-        hashResult.put("T3", t3Db);
-        return hashResult;
+    public Map<String, Object> counterToMap() {
+        HashMap<String, Object> hashCounter = new HashMap<>();
+        hashCounter.put("Горячая вода", hwDb);
+        hashCounter.put("Холодная вода", cwDb);
+        hashCounter.put("T1", t1Db);
+        hashCounter.put("T2", t2Db);
+        hashCounter.put("T3", t3Db);
+        return hashCounter;
     }
 }

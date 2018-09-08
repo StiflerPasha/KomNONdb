@@ -28,14 +28,8 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    float HW_KEF,
-            CW_KEF,
-            T1_KEF,
-            T2_KEF,
-            T3_KEF,
-            WOF_KEF,
-            PHONE_KEF,
-            HOUSE_KEF;
+    float HW_KEF, CW_KEF, T1_KEF, T2_KEF, T3_KEF, WOF_KEF, PHONE_KEF, HOUSE_KEF;
+    float hwRes, cwRes, wofRes, elRes, allRes;
     int PERSONS_KEF;
 
     String[] monthNames = { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
@@ -152,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textResultHW.setText("Горячая вода:");
             litrHW.setText(resHW + "л");
             sumHW.setText(hw + " руб");
+            hwRes = resultHW;
 
             int cw1 = Integer.parseInt(cwPr.getText().toString());
             int cw2 = Integer.parseInt(cw.getText().toString());
@@ -162,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textResultCW.setText("Холодная вода:");
             litrCW.setText(resCW + "л");
             sumCW.setText(cw + " руб");
+            cwRes = resultCW;
 
             int resWof = (hw2 - hw1) + (cw2 - cw1);
             float resultWof = resWof * WOF_KEF;
@@ -170,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textResultWof.setText("Водоотвод:");
             litrWof.setText(resWof + "л");
             sumWof.setText(wof + " руб");
+            wofRes = resultWof;
 
             int elPr1 = Integer.parseInt(t1Pr.getText().toString());
             int el1 = Integer.parseInt(t1.getText().toString());
@@ -192,11 +189,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textResultElectr.setText("Электричество:");
             litrEl.setText(resT1 + "|" + resT2 + "|" + resT3);
             sumEl.setText(el + " руб");
+            elRes = resultElectr;
 
             float resultAll = resultHW + resultCW + resultElectr + resultWof + PHONE_KEF;
             BigDecimal all = new BigDecimal(resultAll);
             all = all.setScale(2, BigDecimal.ROUND_HALF_UP);
             textResultAll.setText(all + " руб");
+            allRes = resultAll;
 
             float peronal = (resultAll + HOUSE_KEF) / PERSONS_KEF;
             BigDecimal pers = new BigDecimal(peronal);
@@ -204,6 +203,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textPersonal.setText(pers + " руб");
 
             saveCounter();
+
+            saveResults();
 
             //btnResult.setText(exit);
         }
@@ -220,12 +221,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Integer.parseInt(t2.getText().toString()),
                 Integer.parseInt(t3.getText().toString()));
 
-        Map<String, Object> counterValues = newCounter.toMap();
+        Map<String, Object> counterValues = newCounter.counterToMap();
 
         Map<String, Object> counter = new HashMap<>();
         counter.put(id, counterValues);
 
         reference.updateChildren(counter);
+    }
+
+    private void saveResults() {
+        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid())).child("Результаты");
+        String date = presMonth.getText().toString();
+        String id = reference.child(date).getKey();
+
+        Results newResult = new Results(cwRes, hwRes, wofRes, elRes, allRes);
+
+        Map<String, Object> resultValues = newResult.ResultsToMap();
+
+        Map<String, Object> result = new HashMap<>();
+        result.put(id, resultValues);
+
+        reference.updateChildren(result);
     }
 
     private void setCounters() {

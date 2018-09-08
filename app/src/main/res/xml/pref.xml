@@ -2,6 +2,9 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <PreferenceCategory android:title="Тарифы на воду">
+    </PreferenceCategory>
+
     <EditTextPreference
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +27,21 @@
         android:summary="Изменить коэфициент"
         android:textSize="18sp"
         android:title="Холодная вода" />
+    <EditTextPreference
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:defaultValue="25.12"
+        android:inputType="numberDecimal"
+        android:key="wofSet"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Изменить коэфициент"
+        android:textSize="18sp"
+        android:title="Водоотвод" />
+
+    <PreferenceCategory android:title="Тарифы на электроэнергию">
+    </PreferenceCategory>
+
     <EditTextPreference
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,17 +75,10 @@
         android:summary="Изменить коэфициент"
         android:textSize="18sp"
         android:title="T3" />
-    <EditTextPreference
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:defaultValue="25.12"
-        android:inputType="numberDecimal"
-        android:key="wofSet"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:summary="Изменить коэфициент"
-        android:textSize="18sp"
-        android:title="Водоотвод" />
+
+    <PreferenceCategory android:title="Доп. услуги">
+    </PreferenceCategory>
+
     <EditTextPreference
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,6 +90,10 @@
         android:summary="Изменить платеж"
         android:textSize="18sp"
         android:title="Телефон" />
+
+    <PreferenceCategory android:title="Квартира">
+    </PreferenceCategory>
+
     <EditTextPreference
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,4 +116,5 @@
         android:summary="Изменить"
         android:textSize="18sp"
         android:title="Количество человек" />
+
 </PreferenceScreen>

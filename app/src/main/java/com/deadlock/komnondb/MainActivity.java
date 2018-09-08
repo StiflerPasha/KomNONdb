@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
 
     final String result = "Результат";
-    final String exit = "Сохранить и выйти";
+    //final String exit = "Сохранить и выйти";
 
     SharedPreferences sp;
 
@@ -233,16 +233,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         reference.child(prevDate).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Long hwPrFromDb = dataSnapshot.child("Горячая вода").getValue(Long.class);
+                Long cwPrFromDb = dataSnapshot.child("Холодная вода").getValue(Long.class);
+                Long t1PrFromDb = dataSnapshot.child("T1").getValue(Long.class);
+                Long t2PrFromDb = dataSnapshot.child("T2").getValue(Long.class);
+                Long t3PrFromDb = dataSnapshot.child("T3").getValue(Long.class);
+                hwPr.setText(hwPrFromDb != null ? hwPrFromDb.toString() : null);
+                cwPr.setText(cwPrFromDb != null ? cwPrFromDb.toString() : null);
+                t1Pr.setText(t1PrFromDb != null ? t1PrFromDb.toString() : null);
+                t2Pr.setText(t2PrFromDb != null ? t2PrFromDb.toString() : null);
+                t3Pr.setText(t3PrFromDb != null ? t3PrFromDb.toString() : null);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        String presDate = presMonth.getText().toString();
+        reference.child(presDate).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Long hwFromDb = dataSnapshot.child("Горячая вода").getValue(Long.class);
                 Long cwFromDb = dataSnapshot.child("Холодная вода").getValue(Long.class);
                 Long t1FromDb = dataSnapshot.child("T1").getValue(Long.class);
                 Long t2FromDb = dataSnapshot.child("T2").getValue(Long.class);
                 Long t3FromDb = dataSnapshot.child("T3").getValue(Long.class);
-                hwPr.setText(hwFromDb != null ? hwFromDb.toString() : null);
-                cwPr.setText(cwFromDb != null ? cwFromDb.toString() : null);
-                t1Pr.setText(t1FromDb != null ? t1FromDb.toString() : null);
-                t2Pr.setText(t2FromDb != null ? t2FromDb.toString() : null);
-                t3Pr.setText(t3FromDb != null ? t3FromDb.toString() : null);
+                hw.setText(hwFromDb != null ? hwFromDb.toString() : null);
+                cw.setText(cwFromDb != null ? cwFromDb.toString() : null);
+                t1.setText(t1FromDb != null ? t1FromDb.toString() : null);
+                t2.setText(t2FromDb != null ? t2FromDb.toString() : null);
+                t3.setText(t3FromDb != null ? t3FromDb.toString() : null);
             }
 
             @Override

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,7 +18,7 @@
         android:text="@string/textPrev"
         android:textAlignment="center"
         android:textColor="#980000"
-        android:textSize="20sp"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,8 +57,6 @@
         android:id="@+id/etHWpr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray"
         android:ems="4"
@@ -69,16 +66,14 @@
         android:textAllCaps="false"
         android:textColor="#8b0000"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/etCWpr"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
         android:id="@+id/etCWpr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray"
         android:ems="4"
@@ -87,8 +82,8 @@
         android:textAlignment="center"
         android:textColor="#8b0000"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etHWpr"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
@@ -109,8 +104,7 @@
         android:id="@+id/etT1pr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray"
         android:ems="4"
@@ -120,15 +114,12 @@
         android:textColor="#8b0000"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/etT2pr"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
         android:id="@+id/etT2pr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray"
         android:ems="4"
@@ -137,16 +128,15 @@
         android:textAlignment="center"
         android:textColor="#8b0000"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/etT3pr"
-        app:layout_constraintStart_toEndOf="@+id/etT1pr"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
         android:id="@+id/etT3pr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray"
         android:ems="4"
@@ -155,7 +145,6 @@
         android:textAlignment="center"
         android:textColor="#8b0000"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etT2pr"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -169,7 +158,7 @@
         android:text="@string/textPres"
         android:textAlignment="center"
         android:textColor="#669900"
-        android:textSize="20sp"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etT2pr" />
@@ -208,8 +197,7 @@
         android:id="@+id/etT1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray"
         android:ems="4"
@@ -219,15 +207,12 @@
         android:textColor="#4c7100"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/etT2"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <EditText
         android:id="@+id/etT2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray"
         android:ems="4"
@@ -236,16 +221,15 @@
         android:textAlignment="center"
         android:textColor="#4c7100"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/etT3"
-        app:layout_constraintStart_toEndOf="@+id/etT1"
+        app:layout_constraintEnd_toEndOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <EditText
         android:id="@+id/etT3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray"
         android:ems="4"
@@ -254,7 +238,6 @@
         android:textAlignment="center"
         android:textColor="#4c7100"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etT2"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -262,8 +245,6 @@
         android:id="@+id/etHW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray"
         android:ems="4"
@@ -272,16 +253,14 @@
         android:textAlignment="center"
         android:textColor="#4c7100"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/etCW"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <EditText
         android:id="@+id/etCW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray"
         android:ems="4"
@@ -290,8 +269,8 @@
         android:textAlignment="center"
         android:textColor="#4c7100"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etHW"
+        app:layout_constraintEnd_toEndOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView

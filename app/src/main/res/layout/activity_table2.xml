@@ -3,63 +3,80 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:stretchColumns="*"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TableActivity">
 
     <TableLayout
+        android:id="@+id/table"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:stretchColumns="*"
-        android:id="@+id/table">
+        android:stretchColumns="*">
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/A"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Месяц"
-            android:textAlignment="center" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/B"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Гор.вода"
-            android:textAlignment="center" />
+            <TextView
+                android:id="@+id/A"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rec"
+                android:text="Месяц"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/C"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Хол.вода"
-            android:textAlignment="center" />
+            <TextView
+                android:id="@+id/B"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rec"
+                android:text="Гор.вода"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/D"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Водоотв"
-            android:textAlignment="center" />
+            <TextView
+                android:id="@+id/C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rec"
+                android:text="Хол.вода"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/E"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Электр"
-            android:textAlignment="center" />
+            <TextView
+                android:id="@+id/D"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rec"
+                android:text="Водоотв"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/F"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Всего"
-            android:textAlignment="center" />
-    </TableRow>
+            <TextView
+                android:id="@+id/E"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rec"
+                android:text="Электр"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rec"
+                android:text="Всего"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="18sp" />
+        </TableRow>
     </TableLayout>
 
     <Button

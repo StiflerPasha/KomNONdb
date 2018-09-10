@@ -1,5 +1,6 @@
 package com.deadlock.komnondb;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -41,9 +43,6 @@ public class TableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table2);
 
-        Calendar calendar = Calendar.getInstance();
-        String month = monthNames[calendar.get(Calendar.MONTH)];
-
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid())).child("Результаты");
 
@@ -60,53 +59,65 @@ public class TableActivity extends AppCompatActivity {
     }
 
     private void getResult() {
-        reference.child(month).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Long hwResFromDb = dataSnapshot.child("Горячая вода").getValue(Long.class);
-                Long cwResFromDb = dataSnapshot.child("Холодная вода").getValue(Long.class);
-                Long wofResFromDb = dataSnapshot.child("Водоотвод").getValue(Long.class);
-                Long elResFromDb = dataSnapshot.child("Электричество").getValue(Long.class);
-                Long allResFromDb = dataSnapshot.child("Всего").getValue(Long.class);
 
-                TextView textMonth = new TextView(getApplicationContext());
-                textMonth.setGravity(Gravity.CENTER_HORIZONTAL);
-                textMonth.setText(month);
+        for (int i = 0; i <= 11; i++) {
+            final int finalI = i;
+            reference.child(monthNames[i]).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Float hwResFromDb = dataSnapshot.child("Горячая вода").getValue(Float.class);
+                    Float cwResFromDb = dataSnapshot.child("Холодная вода").getValue(Float.class);
+                    Float wofResFromDb = dataSnapshot.child("Водоотвод").getValue(Float.class);
+                    Float elResFromDb = dataSnapshot.child("Электричество").getValue(Float.class);
+                    Float allResFromDb = dataSnapshot.child("Всего").getValue(Float.class);
 
-                TextView textHW = new TextView(getApplicationContext());
-                textHW.setGravity(Gravity.CENTER_HORIZONTAL);
-                textHW.setText(hwResFromDb != null ? hwResFromDb.toString() : null);
+                    TextView textMonth = new TextView(getApplicationContext());
+                    textMonth.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textMonth.setText(monthNames[finalI]);
+                    textMonth.setTextColor(Color.parseColor("#FFD37E01"));
+                    textMonth.setBackgroundResource(R.drawable.shape_rec);
+                    textMonth.setTextSize(18);
 
-                TextView textCW = new TextView(getApplicationContext());
-                textCW.setGravity(Gravity.CENTER_HORIZONTAL);
-                textCW.setText(cwResFromDb != null ? cwResFromDb.toString() : null);
+                    TextView textHW = new TextView(getApplicationContext());
+                    textHW.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textHW.setText(hwResFromDb != null ? hwResFromDb.toString() : null);
+                    textHW.setBackgroundResource(R.drawable.shape_rec_4dp);
 
-                TextView textWof = new TextView(getApplicationContext());
-                textWof.setGravity(Gravity.CENTER_HORIZONTAL);
-                textWof.setText(wofResFromDb != null ? wofResFromDb.toString() : null);
+                    TextView textCW = new TextView(getApplicationContext());
+                    textCW.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textCW.setText(cwResFromDb != null ? cwResFromDb.toString() : null);
+                    textCW.setBackgroundResource(R.drawable.shape_rec_4dp);
 
-                TextView textEl = new TextView(getApplicationContext());
-                textEl.setGravity(Gravity.CENTER_HORIZONTAL);
-                textEl.setText(elResFromDb != null ? elResFromDb.toString() : null);
+                    TextView textWof = new TextView(getApplicationContext());
+                    textWof.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textWof.setText(wofResFromDb != null ? wofResFromDb.toString() : null);
+                    textWof.setBackgroundResource(R.drawable.shape_rec_4dp);
 
-                TextView textAll = new TextView(getApplicationContext());
-                textAll.setGravity(Gravity.CENTER_HORIZONTAL);
-                textAll.setText(allResFromDb != null ? allResFromDb.toString() : null);
+                    TextView textEl = new TextView(getApplicationContext());
+                    textEl.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textEl.setText(elResFromDb != null ? elResFromDb.toString() : null);
+                    textEl.setBackgroundResource(R.drawable.shape_rec_4dp);
 
-                TableRow row = new TableRow(getApplicationContext());
-                row.addView(textMonth);
-                row.addView(textHW);
-                row.addView(textCW);
-                row.addView(textWof);
-                row.addView(textEl);
-                row.addView(textAll);
-                table.addView(row);
-            }
+                    TextView textAll = new TextView(getApplicationContext());
+                    textAll.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textAll.setText(allResFromDb != null ? allResFromDb.toString() : null);
+                    textAll.setBackgroundResource(R.drawable.shape_rec_4dp);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    TableRow row = new TableRow(getApplicationContext());
+                    row.addView(textMonth);
+                    row.addView(textHW);
+                    row.addView(textCW);
+                    row.addView(textWof);
+                    row.addView(textEl);
+                    row.addView(textAll);
+                    table.addView(row);
+                }
 
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 }

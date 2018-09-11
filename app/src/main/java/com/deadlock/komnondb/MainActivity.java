@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
 
     final String result = "Результат";
-    //final String exit = "Сохранить и выйти";
 
     SharedPreferences sp;
 
@@ -118,11 +117,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-       /* if (btnResult.getText().equals(exit)) {
-            finish();
-            //finishAffinity();
-        }*/
-
         if (TextUtils.isEmpty(hwPr.getText().toString()) ||
                 TextUtils.isEmpty(hw.getText().toString()) ||
                 TextUtils.isEmpty(cwPr.getText().toString()) ||
@@ -146,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textResultHW.setText("Горячая вода:");
             litrHW.setText(resHW + "л");
             sumHW.setText(hw + " руб");
-            hwRes = resultHW;
+            hwRes = (float) Math.round(resultHW * 100) / 100;
 
             int cw1 = Integer.parseInt(cwPr.getText().toString());
             int cw2 = Integer.parseInt(cw.getText().toString());
@@ -157,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textResultCW.setText("Холодная вода:");
             litrCW.setText(resCW + "л");
             sumCW.setText(cw + " руб");
-            cwRes = resultCW;
+            cwRes = (float) Math.round(resultCW * 100) / 100;
 
             int resWof = (hw2 - hw1) + (cw2 - cw1);
             float resultWof = resWof * WOF_KEF;
@@ -166,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textResultWof.setText("Водоотвод:");
             litrWof.setText(resWof + "л");
             sumWof.setText(wof + " руб");
-            wofRes = resultWof;
+            wofRes = (float) Math.round(resultWof * 100) / 100;
 
             int elPr1 = Integer.parseInt(t1Pr.getText().toString());
             int el1 = Integer.parseInt(t1.getText().toString());
@@ -189,13 +183,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textResultElectr.setText("Электричество:");
             litrEl.setText(resT1 + "|" + resT2 + "|" + resT3);
             sumEl.setText(el + " руб");
-            elRes = resultElectr;
+            elRes = (float) Math.round(resultElectr * 100) / 100;
 
             float resultAll = resultHW + resultCW + resultElectr + resultWof + PHONE_KEF;
             BigDecimal all = new BigDecimal(resultAll);
             all = all.setScale(2, BigDecimal.ROUND_HALF_UP);
             textResultAll.setText(all + " руб");
-            allRes = resultAll;
+            allRes = (float) Math.round(resultAll * 100) / 100;
 
             float peronal = (resultAll + HOUSE_KEF) / PERSONS_KEF;
             BigDecimal pers = new BigDecimal(peronal);

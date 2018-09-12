@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Counters {
 
-    private float hwDb, cwDb, t1Db, t2Db, t3Db;
+    private int hwDb, cwDb, t1Db, t2Db, t3Db;
 
     public Counters() {
 

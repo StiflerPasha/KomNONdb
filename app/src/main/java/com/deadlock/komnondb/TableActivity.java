@@ -37,6 +37,8 @@ public class TableActivity extends AppCompatActivity {
     Calendar calendar = Calendar.getInstance();
     String month = monthNames[calendar.get(Calendar.MONTH)];
 
+    Button btnRefresh;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +46,17 @@ public class TableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_table2);
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid())).child("Результаты");
+        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid()));
 
         table = findViewById(R.id.table);
+
+        /*btnRefresh = findViewById(R.id.btnRefresh);
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getResult();
+            }
+        });*/
 
         getResult();
 
@@ -58,11 +68,20 @@ public class TableActivity extends AppCompatActivity {
             reference.child(monthNames[i]).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Float hwResFromDb = dataSnapshot.child("Горячая вода").getValue(Float.class);
-                    Float cwResFromDb = dataSnapshot.child("Холодная вода").getValue(Float.class);
-                    Float wofResFromDb = dataSnapshot.child("Водоотвод").getValue(Float.class);
-                    Float elResFromDb = dataSnapshot.child("Электричество").getValue(Float.class);
-                    Float allResFromDb = dataSnapshot.child("Всего").getValue(Float.class);
+                    Long hwFromDb = dataSnapshot.child("Показания").child("Горячая вода").getValue(Long.class);
+                    Long hwLitrFromDb = dataSnapshot.child("Результаты").child("Горячая вода*").getValue(Long.class);
+                    Float hwResFromDb = dataSnapshot.child("Результаты").child("Горячая вода").getValue(Float.class);
+
+                    Long cwFromDb = dataSnapshot.child("Показания").child("Холодная вода").getValue(Long.class);
+                    Long cwLitrFromDb = dataSnapshot.child("Результаты").child("Холодная вода*").getValue(Long.class);
+                    Float cwResFromDb = dataSnapshot.child("Результаты").child("Холодная вода").getValue(Float.class);
+
+                    Long wofLitrFromDb = dataSnapshot.child("Результаты").child("Водоотвод*").getValue(Long.class);
+                    Float wofResFromDb = dataSnapshot.child("Результаты").child("Водоотвод").getValue(Float.class);
+
+                    Float elResFromDb = dataSnapshot.child("Результаты").child("Электричество").getValue(Float.class);
+                    Float allResFromDb = dataSnapshot.child("Результаты").child("Всего").getValue(Float.class);
+
 
                     TextView textMonth = new TextView(getApplicationContext());
                     if (month.equals(monthNames[finalI])) {
@@ -80,37 +99,72 @@ public class TableActivity extends AppCompatActivity {
                     }
 
                     TextView textHW = new TextView(getApplicationContext());
-                    textHW.setGravity(Gravity.END);
-                    textHW.setText(hwResFromDb != null ? hwResFromDb.toString() : null);
-                    textHW.setBackgroundResource(R.drawable.shape_rec_4dp);
-                    textHW.setTextColor(Color.parseColor("#007BA7"));
+                    textHW.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textHW.setText(hwFromDb != null ? hwFromDb.toString() : null);
+                    textHW.setBackgroundResource(R.drawable.shape_rec_hw);
+                    textHW.setTextColor(Color.parseColor("#ffffee"));
                     textHW.setTextSize(16);
 
+                    TextView textHWlitr = new TextView(getApplicationContext());
+                    textHWlitr.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textHWlitr.setText(hwLitrFromDb != null ? hwLitrFromDb.toString() : null);
+                    textHWlitr.setBackgroundResource(R.drawable.shape_rec_hw);
+                    textHWlitr.setTextColor(Color.parseColor("#ffffee"));
+                    textHWlitr.setTextSize(16);
+
+                    TextView textHWres = new TextView(getApplicationContext());
+                    textHWres.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textHWres.setText(hwResFromDb != null ? hwResFromDb.toString() : null);
+                    textHWres.setBackgroundResource(R.drawable.shape_rec_hw);
+                    textHWres.setTextColor(Color.parseColor("#ffffee"));
+                    textHWres.setTextSize(16);
+
                     TextView textCW = new TextView(getApplicationContext());
-                    textCW.setGravity(Gravity.END);
-                    textCW.setText(cwResFromDb != null ? cwResFromDb.toString() : null);
-                    textCW.setBackgroundResource(R.drawable.shape_rec_4dp);
-                    textCW.setTextColor(Color.parseColor("#007BA7"));
+                    textCW.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textCW.setText(cwFromDb != null ? cwFromDb.toString() : null);
+                    textCW.setBackgroundResource(R.drawable.shape_rec_cw);
+                    textCW.setTextColor(Color.parseColor("#ffffee"));
                     textCW.setTextSize(16);
 
-                    TextView textWof = new TextView(getApplicationContext());
-                    textWof.setGravity(Gravity.END);
-                    textWof.setText(wofResFromDb != null ? wofResFromDb.toString() : null);
-                    textWof.setBackgroundResource(R.drawable.shape_rec_4dp);
-                    textWof.setTextColor(Color.parseColor("#007BA7"));
-                    textWof.setTextSize(16);
+                    TextView textCWlitr = new TextView(getApplicationContext());
+                    textCWlitr.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textCWlitr.setText(cwLitrFromDb != null ? cwLitrFromDb.toString() : null);
+                    textCWlitr.setBackgroundResource(R.drawable.shape_rec_cw);
+                    textCWlitr.setTextColor(Color.parseColor("#ffffee"));
+                    textCWlitr.setTextSize(16);
+
+                    TextView textCWres = new TextView(getApplicationContext());
+                    textCWres.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textCWres.setText(cwResFromDb != null ? cwResFromDb.toString() : null);
+                    textCWres.setBackgroundResource(R.drawable.shape_rec_cw);
+                    textCWres.setTextColor(Color.parseColor("#ffffee"));
+                    textCWres.setTextSize(16);
+
+                    TextView textWoflitr = new TextView(getApplicationContext());
+                    textWoflitr.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textWoflitr.setText(wofLitrFromDb != null ? wofLitrFromDb.toString() : null);
+                    textWoflitr.setBackgroundResource(R.drawable.shape_rec_wof);
+                    textWoflitr.setTextColor(Color.parseColor("#ffffee"));
+                    textWoflitr.setTextSize(16);
+
+                    TextView textWofres = new TextView(getApplicationContext());
+                    textWofres.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textWofres.setText(wofResFromDb != null ? wofResFromDb.toString() : null);
+                    textWofres.setBackgroundResource(R.drawable.shape_rec_wof);
+                    textWofres.setTextColor(Color.parseColor("#ffffee"));
+                    textWofres.setTextSize(16);
 
                     TextView textEl = new TextView(getApplicationContext());
-                    textEl.setGravity(Gravity.END);
+                    textEl.setGravity(Gravity.CENTER_HORIZONTAL);
                     textEl.setText(elResFromDb != null ? elResFromDb.toString() : null);
-                    textEl.setBackgroundResource(R.drawable.shape_rec_4dp);
-                    textEl.setTextColor(Color.parseColor("#007BA7"));
+                    textEl.setBackgroundResource(R.drawable.shape_rec_elec);
+                    textEl.setTextColor(Color.parseColor("#ffffee"));
                     textEl.setTextSize(16);
 
                     TextView textAll = new TextView(getApplicationContext());
                     textAll.setGravity(Gravity.CENTER_HORIZONTAL);
                     textAll.setText(allResFromDb != null ? allResFromDb.toString() : null);
-                    textAll.setBackgroundResource(R.drawable.shape_rec_4dp);
+                    textAll.setBackgroundResource(R.drawable.shape_rec_all);
                     textAll.setTextColor(Color.parseColor("#6495ED"));
                     textAll.setTextSize(16);
                     textAll.setTypeface(null, Typeface.BOLD);
@@ -118,8 +172,13 @@ public class TableActivity extends AppCompatActivity {
                     TableRow row = new TableRow(getApplicationContext());
                     row.addView(textMonth);
                     row.addView(textHW);
+                    row.addView(textHWlitr);
+                    row.addView(textHWres);
                     row.addView(textCW);
-                    row.addView(textWof);
+                    row.addView(textCWlitr);
+                    row.addView(textCWres);
+                    row.addView(textWoflitr);
+                    row.addView(textWofres);
                     row.addView(textEl);
                     row.addView(textAll);
                     table.addView(row);

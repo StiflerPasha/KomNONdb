@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     float hwRes, cwRes, wofRes, elRes, allRes;
     int PERSONS_KEF;
 
+    int hwToDb, cwToDb, wofToDb;
+
+
     String[] monthNames = { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
             "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
 
@@ -49,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     FirebaseDatabase database;
     DatabaseReference reference;
+
+    Calendar calendar = Calendar.getInstance();
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -103,12 +109,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         HOUSE_KEF = Float.parseFloat(sp.getString("houseSet", "35000.0"));
         PERSONS_KEF = Integer.parseInt(sp.getString("personsSet", "3"));
 
-        Calendar calendar = Calendar.getInstance();
         presMonth.setText(monthNames[calendar.get(Calendar.MONTH)]);
         prevMonth.setText(monthNames[calendar.get(Calendar.MONTH) - 1]);
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid())).child("Показания");
+        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid()));
 
         setCounters();
     }
@@ -141,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             litrHW.setText(resHW + "л");
             sumHW.setText(hw + " руб");
             hwRes = (float) Math.round(resultHW * 100) / 100;
+            hwToDb = resHW;
 
             int cw1 = Integer.parseInt(cwPr.getText().toString());
             int cw2 = Integer.parseInt(cw.getText().toString());
@@ -152,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             litrCW.setText(resCW + "л");
             sumCW.setText(cw + " руб");
             cwRes = (float) Math.round(resultCW * 100) / 100;
+            cwToDb = resCW;
 
             int resWof = (hw2 - hw1) + (cw2 - cw1);
             float resultWof = resWof * WOF_KEF;
@@ -161,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             litrWof.setText(resWof + "л");
             sumWof.setText(wof + " руб");
             wofRes = (float) Math.round(resultWof * 100) / 100;
+            wofToDb = resWof;
 
             int elPr1 = Integer.parseInt(t1Pr.getText().toString());
             int el1 = Integer.parseInt(t1.getText().toString());
@@ -196,7 +204,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             pers = pers.setScale(2, BigDecimal.ROUND_HALF_UP);
             textPersonal.setText(pers + " руб");
 
-            saveCounter();
+            savePresCounter();
+            //savePrevCounter();
 
             saveResults();
 
@@ -204,9 +213,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void saveCounter() {
+    private void savePresCounter() {
         String date = presMonth.getText().toString();
-        String id = reference.child(date).getKey();
+        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid())).
+                child(date);
+        String id = "Показания";
 
         Counters newCounter = new Counters(
                 Integer.parseInt(hw.getText().toString()),
@@ -223,12 +234,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         reference.updateChildren(counter);
     }
 
-    private void saveResults() {
-        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid())).child("Результаты");
-        String date = presMonth.getText().toString();
-        String id = reference.child(date).getKey();
+    private void savePrevCounter() {
+        String date = prevMonth.getText().toString();
+        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid())).
+                child(date);
+        String id = "Показания";
 
-        Results newResult = new Results(cwRes, hwRes, wofRes, elRes, allRes);
+        Counters newCounter = new Counters(
+                Integer.parseInt(hwPr.getText().toString()),
+                Integer.parseInt(cwPr.getText().toString()),
+                Integer.parseInt(t1Pr.getText().toString()),
+                Integer.parseInt(t2Pr.getText().toString()),
+                Integer.parseInt(t3Pr.getText().toString()));
+
+        Map<String, Object> counterValues = newCounter.counterToMap();
+
+        Map<String, Object> counter = new HashMap<>();
+        counter.put(id, counterValues);
+
+        reference.updateChildren(counter);
+    }
+
+    private void saveResults() {
+        String date = presMonth.getText().toString();
+        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid())).
+                child(date);
+        String id = "Результаты";
+
+        Results newResult = new Results(hwRes, hwToDb, cwRes, cwToDb, wofRes, wofToDb, elRes, allRes);
 
         Map<String, Object> resultValues = newResult.ResultsToMap();
 
@@ -243,11 +276,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         reference.child(prevDate).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Long hwPrFromDb = dataSnapshot.child("Горячая вода").getValue(Long.class);
-                Long cwPrFromDb = dataSnapshot.child("Холодная вода").getValue(Long.class);
-                Long t1PrFromDb = dataSnapshot.child("T1").getValue(Long.class);
-                Long t2PrFromDb = dataSnapshot.child("T2").getValue(Long.class);
-                Long t3PrFromDb = dataSnapshot.child("T3").getValue(Long.class);
+                Long hwPrFromDb = dataSnapshot.child("Показания").child("Горячая вода").getValue(Long.class);
+                Long cwPrFromDb = dataSnapshot.child("Показания").child("Холодная вода").getValue(Long.class);
+                Long t1PrFromDb = dataSnapshot.child("Показания").child("T1").getValue(Long.class);
+                Long t2PrFromDb = dataSnapshot.child("Показания").child("T2").getValue(Long.class);
+                Long t3PrFromDb = dataSnapshot.child("Показания").child("T3").getValue(Long.class);
                 hwPr.setText(hwPrFromDb != null ? hwPrFromDb.toString() : null);
                 cwPr.setText(cwPrFromDb != null ? cwPrFromDb.toString() : null);
                 t1Pr.setText(t1PrFromDb != null ? t1PrFromDb.toString() : null);
@@ -265,11 +298,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         reference.child(presDate).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Long hwFromDb = dataSnapshot.child("Горячая вода").getValue(Long.class);
-                Long cwFromDb = dataSnapshot.child("Холодная вода").getValue(Long.class);
-                Long t1FromDb = dataSnapshot.child("T1").getValue(Long.class);
-                Long t2FromDb = dataSnapshot.child("T2").getValue(Long.class);
-                Long t3FromDb = dataSnapshot.child("T3").getValue(Long.class);
+                Long hwFromDb = dataSnapshot.child("Показания").child("Горячая вода").getValue(Long.class);
+                Long cwFromDb = dataSnapshot.child("Показания").child("Холодная вода").getValue(Long.class);
+                Long t1FromDb = dataSnapshot.child("Показания").child("T1").getValue(Long.class);
+                Long t2FromDb = dataSnapshot.child("Показания").child("T2").getValue(Long.class);
+                Long t3FromDb = dataSnapshot.child("Показания").child("T3").getValue(Long.class);
                 hw.setText(hwFromDb != null ? hwFromDb.toString() : null);
                 cw.setText(cwFromDb != null ? cwFromDb.toString() : null);
                 t1.setText(t1FromDb != null ? t1FromDb.toString() : null);

@@ -1,5 +1,6 @@
 package com.deadlock.komnondb;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
@@ -59,7 +60,6 @@ public class TableActivity extends AppCompatActivity {
         });*/
 
         getResult();
-
     }
 
     private void getResult() {
@@ -68,20 +68,23 @@ public class TableActivity extends AppCompatActivity {
             reference.child(monthNames[i]).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Long hwFromDb = dataSnapshot.child("Показания").child("Горячая вода").getValue(Long.class);
-                    Long hwLitrFromDb = dataSnapshot.child("Результаты").child("Горячая вода*").getValue(Long.class);
+                    Integer hwFromDb = dataSnapshot.child("Показания").child("Горячая вода").getValue(Integer.class);
+                    Integer hwLitrFromDb = dataSnapshot.child("Результаты").child("Горячая вода*").getValue(Integer.class);
                     Float hwResFromDb = dataSnapshot.child("Результаты").child("Горячая вода").getValue(Float.class);
 
-                    Long cwFromDb = dataSnapshot.child("Показания").child("Холодная вода").getValue(Long.class);
-                    Long cwLitrFromDb = dataSnapshot.child("Результаты").child("Холодная вода*").getValue(Long.class);
+                    Integer cwFromDb = dataSnapshot.child("Показания").child("Холодная вода").getValue(Integer.class);
+                    Integer cwLitrFromDb = dataSnapshot.child("Результаты").child("Холодная вода*").getValue(Integer.class);
                     Float cwResFromDb = dataSnapshot.child("Результаты").child("Холодная вода").getValue(Float.class);
 
-                    Long wofLitrFromDb = dataSnapshot.child("Результаты").child("Водоотвод*").getValue(Long.class);
+                    Integer wofLitrFromDb = dataSnapshot.child("Результаты").child("Водоотвод*").getValue(Integer.class);
                     Float wofResFromDb = dataSnapshot.child("Результаты").child("Водоотвод").getValue(Float.class);
 
+                    Integer t1LitrFromDb = dataSnapshot.child("Показания").child("T1").getValue(Integer.class);
+                    Integer t2LitrFromDb = dataSnapshot.child("Показания").child("T2").getValue(Integer.class);
+                    Integer t3LitrFromDb = dataSnapshot.child("Показания").child("T3").getValue(Integer.class);
                     Float elResFromDb = dataSnapshot.child("Результаты").child("Электричество").getValue(Float.class);
-                    Float allResFromDb = dataSnapshot.child("Результаты").child("Всего").getValue(Float.class);
 
+                    Float allResFromDb = dataSnapshot.child("Результаты").child("Всего").getValue(Float.class);
 
                     TextView textMonth = new TextView(getApplicationContext());
                     if (month.equals(monthNames[finalI])) {
@@ -154,6 +157,27 @@ public class TableActivity extends AppCompatActivity {
                     textWofres.setTextColor(Color.parseColor("#ffffee"));
                     textWofres.setTextSize(16);
 
+                    TextView textT1Litr = new TextView(getApplicationContext());
+                    textT1Litr.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textT1Litr.setText(t1LitrFromDb != null ? t1LitrFromDb.toString() : null);
+                    textT1Litr.setBackgroundResource(R.drawable.shape_rec_elec);
+                    textT1Litr.setTextColor(Color.parseColor("#ffffee"));
+                    textT1Litr.setTextSize(16);
+
+                    TextView textT2Litr = new TextView(getApplicationContext());
+                    textT2Litr.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textT2Litr.setText(t2LitrFromDb != null ? t2LitrFromDb.toString() : null);
+                    textT2Litr.setBackgroundResource(R.drawable.shape_rec_elec);
+                    textT2Litr.setTextColor(Color.parseColor("#ffffee"));
+                    textT2Litr.setTextSize(16);
+
+                    TextView textT3Litr = new TextView(getApplicationContext());
+                    textT3Litr.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textT3Litr.setText(t3LitrFromDb != null ? t3LitrFromDb.toString() : null);
+                    textT3Litr.setBackgroundResource(R.drawable.shape_rec_elec);
+                    textT3Litr.setTextColor(Color.parseColor("#ffffee"));
+                    textT3Litr.setTextSize(16);
+
                     TextView textEl = new TextView(getApplicationContext());
                     textEl.setGravity(Gravity.CENTER_HORIZONTAL);
                     textEl.setText(elResFromDb != null ? elResFromDb.toString() : null);
@@ -179,6 +203,9 @@ public class TableActivity extends AppCompatActivity {
                     row.addView(textCWres);
                     row.addView(textWoflitr);
                     row.addView(textWofres);
+                    row.addView(textT1Litr);
+                    row.addView(textT2Litr);
+                    row.addView(textT3Litr);
                     row.addView(textEl);
                     row.addView(textAll);
                     table.addView(row);

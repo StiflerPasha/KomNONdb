@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/shape_rec"
-                android:text="Гор.вода"
+                android:text="Гор/в"
                 android:textAlignment="center"
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="16sp" />
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_rec"
-                android:text="Хол.вода"
+                android:text="Хол/в"
                 android:textAlignment="center"
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="16sp" />
@@ -107,11 +107,41 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rec"
+                android:text="T1"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rec"
+                android:text="T2"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rec"
+                android:text="T3"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="16sp" />
+
+            <TextView
                 android:id="@+id/E"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_rec"
-                android:text="Электр"
+                android:text="Сумма"
                 android:textAlignment="center"
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="16sp" />

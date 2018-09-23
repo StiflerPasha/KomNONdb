@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textPersonal.setText(pers + " руб");
 
             savePresCounter();
-            //savePrevCounter();
+            savePrevCounter();
 
             saveResults();
 
@@ -273,14 +273,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setCounters() {
         String prevDate = prevMonth.getText().toString();
-        reference.child(prevDate).addValueEventListener(new ValueEventListener() {
+        reference.child(prevDate).child("Показания").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Long hwPrFromDb = dataSnapshot.child("Показания").child("Горячая вода").getValue(Long.class);
-                Long cwPrFromDb = dataSnapshot.child("Показания").child("Холодная вода").getValue(Long.class);
-                Long t1PrFromDb = dataSnapshot.child("Показания").child("T1").getValue(Long.class);
-                Long t2PrFromDb = dataSnapshot.child("Показания").child("T2").getValue(Long.class);
-                Long t3PrFromDb = dataSnapshot.child("Показания").child("T3").getValue(Long.class);
+                Long hwPrFromDb = dataSnapshot.child("Горячая вода").getValue(Long.class);
+                Long cwPrFromDb = dataSnapshot.child("Холодная вода").getValue(Long.class);
+                Long t1PrFromDb = dataSnapshot.child("T1").getValue(Long.class);
+                Long t2PrFromDb = dataSnapshot.child("T2").getValue(Long.class);
+                Long t3PrFromDb = dataSnapshot.child("T3").getValue(Long.class);
                 hwPr.setText(hwPrFromDb != null ? hwPrFromDb.toString() : null);
                 cwPr.setText(cwPrFromDb != null ? cwPrFromDb.toString() : null);
                 t1Pr.setText(t1PrFromDb != null ? t1PrFromDb.toString() : null);
@@ -295,14 +295,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         String presDate = presMonth.getText().toString();
-        reference.child(presDate).addValueEventListener(new ValueEventListener() {
+        reference.child(presDate).child("Показания").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Long hwFromDb = dataSnapshot.child("Показания").child("Горячая вода").getValue(Long.class);
-                Long cwFromDb = dataSnapshot.child("Показания").child("Холодная вода").getValue(Long.class);
-                Long t1FromDb = dataSnapshot.child("Показания").child("T1").getValue(Long.class);
-                Long t2FromDb = dataSnapshot.child("Показания").child("T2").getValue(Long.class);
-                Long t3FromDb = dataSnapshot.child("Показания").child("T3").getValue(Long.class);
+                Long hwFromDb = dataSnapshot.child("Горячая вода").getValue(Long.class);
+                Long cwFromDb = dataSnapshot.child("Холодная вода").getValue(Long.class);
+                Long t1FromDb = dataSnapshot.child("T1").getValue(Long.class);
+                Long t2FromDb = dataSnapshot.child("T2").getValue(Long.class);
+                Long t3FromDb = dataSnapshot.child("T3").getValue(Long.class);
                 hw.setText(hwFromDb != null ? hwFromDb.toString() : null);
                 cw.setText(cwFromDb != null ? cwFromDb.toString() : null);
                 t1.setText(t1FromDb != null ? t1FromDb.toString() : null);

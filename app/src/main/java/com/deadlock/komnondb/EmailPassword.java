@@ -56,8 +56,8 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
                             // Sign in success, update UI with the signed-in user's information
                             Intent intent = new Intent(EmailPassword.this, UpperActivity.class);
                             startActivity(intent);
-                            Toast.makeText(EmailPassword.this, "Регистрация успешна!",
-                                    Toast.LENGTH_SHORT).show();
+                            /*Toast.makeText(EmailPassword.this, "Регистрация успешна!",
+                                    Toast.LENGTH_SHORT).show();*/
                             //FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
                         } else {
@@ -81,8 +81,8 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
                             // Sign in success, update UI with the signed-in user's information
                             Intent intent = new Intent(EmailPassword.this, UpperActivity.class);
                             startActivity(intent);
-                            Toast.makeText(EmailPassword.this, "Вход выполнен!",
-                                    Toast.LENGTH_SHORT).show();
+                            /*Toast.makeText(EmailPassword.this, "Вход выполнен!",
+                                    Toast.LENGTH_SHORT).show();*/
                             //FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
                         } else {

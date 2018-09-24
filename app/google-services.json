@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "913663004742-7t3rl83tquof701ee99rat4rq80j4brf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deadlock.komnondb",
+            "certificate_hash": "c4bc6131664655060e6aee1d140c5220108ae2b1"
+          }
+        },
+        {
           "client_id": "913663004742-90gkffei0ebpt8jourdo80km74cgd99e.apps.googleusercontent.com",
           "client_type": 3
         }

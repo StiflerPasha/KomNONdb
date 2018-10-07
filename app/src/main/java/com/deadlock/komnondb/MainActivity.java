@@ -276,11 +276,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         reference.child(prevDate).child("Показания").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Long hwPrFromDb = dataSnapshot.child("Горячая вода").getValue(Long.class);
-                Long cwPrFromDb = dataSnapshot.child("Холодная вода").getValue(Long.class);
-                Long t1PrFromDb = dataSnapshot.child("T1").getValue(Long.class);
-                Long t2PrFromDb = dataSnapshot.child("T2").getValue(Long.class);
-                Long t3PrFromDb = dataSnapshot.child("T3").getValue(Long.class);
+                Integer hwPrFromDb = dataSnapshot.child("Горячая вода").getValue(Integer.class);
+                Integer cwPrFromDb = dataSnapshot.child("Холодная вода").getValue(Integer.class);
+                Integer t1PrFromDb = dataSnapshot.child("T1").getValue(Integer.class);
+                Integer t2PrFromDb = dataSnapshot.child("T2").getValue(Integer.class);
+                Integer t3PrFromDb = dataSnapshot.child("T3").getValue(Integer.class);
                 hwPr.setText(hwPrFromDb != null ? hwPrFromDb.toString() : null);
                 cwPr.setText(cwPrFromDb != null ? cwPrFromDb.toString() : null);
                 t1Pr.setText(t1PrFromDb != null ? t1PrFromDb.toString() : null);
@@ -298,11 +298,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         reference.child(presDate).child("Показания").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Long hwFromDb = dataSnapshot.child("Горячая вода").getValue(Long.class);
-                Long cwFromDb = dataSnapshot.child("Холодная вода").getValue(Long.class);
-                Long t1FromDb = dataSnapshot.child("T1").getValue(Long.class);
-                Long t2FromDb = dataSnapshot.child("T2").getValue(Long.class);
-                Long t3FromDb = dataSnapshot.child("T3").getValue(Long.class);
+                Integer hwFromDb = dataSnapshot.child("Горячая вода").getValue(Integer.class);
+                Integer cwFromDb = dataSnapshot.child("Холодная вода").getValue(Integer.class);
+                Integer t1FromDb = dataSnapshot.child("T1").getValue(Integer.class);
+                Integer t2FromDb = dataSnapshot.child("T2").getValue(Integer.class);
+                Integer t3FromDb = dataSnapshot.child("T3").getValue(Integer.class);
                 hw.setText(hwFromDb != null ? hwFromDb.toString() : null);
                 cw.setText(cwFromDb != null ? cwFromDb.toString() : null);
                 t1.setText(t1FromDb != null ? t1FromDb.toString() : null);

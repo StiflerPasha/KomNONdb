@@ -21,7 +21,7 @@ import java.util.Objects;
 public class UpperActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton btnTable, btnSet;
-    Button btnPokaz;
+    Button btnPokaz, btnExit;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database;
@@ -38,6 +38,8 @@ public class UpperActivity extends AppCompatActivity implements View.OnClickList
         btnSet.setOnClickListener(this);
         btnTable = findViewById(R.id.btnTable);
         btnTable.setOnClickListener(this);
+        btnExit = findViewById(R.id.btnExit);
+        btnExit.setOnClickListener(this);
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid()));
@@ -57,6 +59,11 @@ public class UpperActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnTable:
                 intent = new Intent(this, TableActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btnExit:
+                mAuth.signOut();
+                intent = new Intent(this, EmailPassword.class);
                 startActivity(intent);
                 break;
         }

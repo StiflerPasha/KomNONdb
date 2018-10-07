@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,8 +21,10 @@ import com.google.firebase.auth.FirebaseUser;
 public class EmailPassword extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
-    private EditText ETimail, ETpassword;
+    private EditText ETemail, ETpassword;
     private Button BTNregistration, BTNsignIn;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,21 +33,32 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
 
-        ETimail = findViewById(R.id.et_mail);
+        ETemail = findViewById(R.id.et_mail);
         ETpassword = findViewById(R.id.et_pass);
 
         BTNregistration = findViewById(R.id.btn_registration);
         BTNsignIn = findViewById(R.id.btn_sign_in);
         BTNregistration.setOnClickListener(this);
         BTNsignIn.setOnClickListener(this);
+
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    startActivity(new Intent(EmailPassword.this, UpperActivity.class));
+                    finish();
+                }
+            }
+        };
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_registration) {
-            registration(ETimail.getText().toString(), ETpassword.getText().toString());
+            registration(ETemail.getText().toString(), ETpassword.getText().toString());
         } else if (view.getId() == R.id.btn_sign_in) {
-            signing(ETimail.getText().toString(), ETpassword.getText().toString());
+            signing(ETemail.getText().toString(), ETpassword.getText().toString());
         }
     }
 
@@ -95,5 +110,19 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
                         // ...
                     }
                 });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (authStateListener != null) {
+            mAuth.removeAuthStateListener(authStateListener);
+        }
     }
 }

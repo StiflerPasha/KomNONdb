@@ -1,14 +1,11 @@
 package com.deadlock.komnondb;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -38,9 +35,6 @@ public class TableActivity extends AppCompatActivity {
     Calendar calendar = Calendar.getInstance();
     String month = monthNames[calendar.get(Calendar.MONTH)];
 
-    Button btnRefresh;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,14 +44,6 @@ public class TableActivity extends AppCompatActivity {
         reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid()));
 
         table = findViewById(R.id.table);
-
-        /*btnRefresh = findViewById(R.id.btnRefresh);
-        btnRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getResult();
-            }
-        });*/
 
         getResult();
     }

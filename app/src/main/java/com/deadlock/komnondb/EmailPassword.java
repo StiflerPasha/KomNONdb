@@ -1,7 +1,6 @@
 package com.deadlock.komnondb;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,8 +8,6 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -63,7 +60,7 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
                 if (loginEmpty()) {
                     toast = Toast.makeText(EmailPassword.this, "Заполните все поля...",
                             Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP, 0, 50);
+                    toast.setGravity(Gravity.TOP, 0, 40);
                     toast.show();
                 } else {
                     registration(ETemail.getText().toString(), ETpassword.getText().toString());
@@ -73,7 +70,7 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
                 if (loginEmpty()) {
                     toast = Toast.makeText(EmailPassword.this, "Заполните все поля...",
                             Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP, 0, 50);
+                    toast.setGravity(Gravity.TOP, 0, 40);
                     toast.show();
                 } else {
                     signing(ETemail.getText().toString(), ETpassword.getText().toString());
@@ -92,12 +89,12 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
                             startActivity(intent);
                             toast = Toast.makeText(EmailPassword.this, "Регистрация успешна!",
                                     Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP, 0, 50);
+                            toast.setGravity(Gravity.TOP, 0, 40);
                             toast.show();
                         } else {
                             Toast.makeText(EmailPassword.this, "Регистрация не выполнена...",
                                     Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP, 0, 50);
+                            toast.setGravity(Gravity.TOP, 0, 40);
                             toast.show();
                         }
                     }
@@ -114,13 +111,13 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
                             startActivity(intent);
                             toast = Toast.makeText(EmailPassword.this, "Вход выполнен!",
                                     Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP, 0, 50);
+                            toast.setGravity(Gravity.TOP, 0, 40);
                             toast.show();
 
                         } else {
                             toast = Toast.makeText(EmailPassword.this, "Вход не выполнен...",
                                     Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP, 0, 50);
+                            toast.setGravity(Gravity.TOP, 0, 40);
                             toast.show();
                         }
                     }

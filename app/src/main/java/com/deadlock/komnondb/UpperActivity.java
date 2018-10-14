@@ -23,7 +23,7 @@ public class UpperActivity extends AppCompatActivity implements View.OnClickList
     FirebaseDatabase database;
     DatabaseReference reference;
 
-    private AdView mAdView1, mAdView2, mAdView3;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +32,10 @@ public class UpperActivity extends AppCompatActivity implements View.OnClickList
 
         MobileAds.initialize(this,"ca-app-pub-1175513512164565~6868132934");
 
-        mAdView1 = findViewById(R.id.adView);
-        mAdView2 = findViewById(R.id.adView2);
-        mAdView3 = findViewById(R.id.adView3);
+        mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
                 .build();
-        mAdView1.loadAd(adRequest);
-        mAdView2.loadAd(adRequest);
-        mAdView3.loadAd(adRequest);
+        mAdView.loadAd(adRequest);
 
         btnPokaz = findViewById(R.id.btnPokaz);
         btnPokaz.setOnClickListener(this);

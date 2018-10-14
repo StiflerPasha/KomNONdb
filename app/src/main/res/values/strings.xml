@@ -14,5 +14,11 @@
     <string name="HW">Г/в</string>
     <string name="CW">Х/в</string>
     <string name="btnPokaz">Показания</string>
-    <string name="btnSet">Настройки</string>
+    <string name="btnSet">Тарифы</string>
+    <string name="btnTable">Таблица</string>
+    <string name="btnExit">Выход</string>
+    <string name="banner_ad_unit_id_test">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_unit_id1">ca-app-pub-1175513512164565/6840212775</string>
+    <string name="banner_ad_unit_id2">ca-app-pub-1175513512164565/4710541755</string>
+    <string name="banner_ad_unit_id3">ca-app-pub-1175513512164565/7370572102</string>
 </resources>

@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,6 +27,7 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
     private Button BTNregistration, BTNsignIn;
     private FirebaseAuth.AuthStateListener authStateListener;
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +57,28 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.btn_registration) {
-            registration(ETemail.getText().toString(), ETpassword.getText().toString());
-        } else if (view.getId() == R.id.btn_sign_in) {
-            signing(ETemail.getText().toString(), ETpassword.getText().toString());
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case (R.id.btn_registration):
+                if (loginEmpty()) {
+                    toast = Toast.makeText(EmailPassword.this, "Заполните все поля...",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.TOP, 0, 50);
+                    toast.show();
+                } else {
+                    registration(ETemail.getText().toString(), ETpassword.getText().toString());
+                }
+                break;
+            case (R.id.btn_sign_in):
+                if (loginEmpty()) {
+                    toast = Toast.makeText(EmailPassword.this, "Заполните все поля...",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.TOP, 0, 50);
+                    toast.show();
+                } else {
+                    signing(ETemail.getText().toString(), ETpassword.getText().toString());
+                }
+                break;
         }
     }
 
@@ -68,21 +88,18 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Intent intent = new Intent(EmailPassword.this, UpperActivity.class);
                             startActivity(intent);
-                            /*Toast.makeText(EmailPassword.this, "Регистрация успешна!",
-                                    Toast.LENGTH_SHORT).show();*/
-                            //FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
+                            toast = Toast.makeText(EmailPassword.this, "Регистрация успешна!",
+                                    Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP, 0, 50);
+                            toast.show();
                         } else {
-                            // If sign in fails, display a message to the user.
                             Toast.makeText(EmailPassword.this, "Регистрация не выполнена...",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+                                    Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP, 0, 50);
+                            toast.show();
                         }
-
-                        // ...
                     }
                 });
     }
@@ -93,23 +110,26 @@ public class EmailPassword extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Intent intent = new Intent(EmailPassword.this, UpperActivity.class);
                             startActivity(intent);
-                            /*Toast.makeText(EmailPassword.this, "Вход выполнен!",
-                                    Toast.LENGTH_SHORT).show();*/
-                            //FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(EmailPassword.this, "Вход не выполнен...",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                        }
+                            toast = Toast.makeText(EmailPassword.this, "Вход выполнен!",
+                                    Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP, 0, 50);
+                            toast.show();
 
-                        // ...
+                        } else {
+                            toast = Toast.makeText(EmailPassword.this, "Вход не выполнен...",
+                                    Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP, 0, 50);
+                            toast.show();
+                        }
                     }
                 });
+    }
+
+    private boolean loginEmpty() {
+        return TextUtils.isEmpty(ETemail.getText().toString()) ||
+                TextUtils.isEmpty(ETpassword.getText().toString());
     }
 
     @Override

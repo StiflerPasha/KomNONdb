@@ -2,31 +2,37 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UpperActivity"
     tools:ignore="ContentDescription">
 
-    <ImageButton
+    <Button
         android:id="@+id/btnTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:layout_marginEnd="24dp"
-        android:elevation="0dp"
-        android:src="@drawable/ic_receipt"
-        android:text="@string/btnPokaz"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/ic_view_quilt"
+        android:text="@string/btnTable"
+        android:textAllCaps="false"
+        android:textColor="#0288d1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageButton
+    <Button
         android:id="@+id/btnSet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:layout_marginStart="24dp"
-        android:src="@drawable/ic_build"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/ic_donut_large"
         android:text="@string/btnSet"
+        android:textAllCaps="false"
+        android:textColor="#0288d1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -36,30 +42,15 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:fontFamily="serif"
-        android:text="Показания"
-        android:textSize="18sp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/ic_timeline"
+        android:text="@string/btnPokaz"
+        android:textAllCaps="false"
+        android:textColor="#0288d1"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/btnTable"
         app:layout_constraintStart_toEndOf="@+id/btnSet"
         app:layout_constraintTop_toTopOf="@+id/btnSet" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Тарифы"
-        app:layout_constraintEnd_toEndOf="@+id/btnSet"
-        app:layout_constraintStart_toStartOf="@+id/btnSet"
-        app:layout_constraintTop_toBottomOf="@+id/btnSet" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Таблица"
-        app:layout_constraintEnd_toEndOf="@+id/btnTable"
-        app:layout_constraintStart_toStartOf="@+id/btnTable"
-        app:layout_constraintTop_toBottomOf="@+id/btnTable" />
 
     <Button
         android:id="@+id/btnExit"
@@ -67,8 +58,50 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:text="Выйти"
+        android:drawableEnd="@drawable/ic_action_exit"
+        android:text="@string/btnExit"
+        android:textAllCaps="false"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id_test"
+        ads:layout_constraintBottom_toTopOf="@+id/btnPokaz"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toBottomOf="@+id/btnExit"
+        ads:layout_constraintVertical_bias="0.19999999" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/adView1"
+        app:layout_constraintStart_toStartOf="@+id/adView1"
+        app:layout_constraintTop_toBottomOf="@+id/adView1"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id2"/>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/adView2"
+        app:layout_constraintStart_toStartOf="@+id/adView2"
+        app:layout_constraintTop_toBottomOf="@+id/adView2"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id3"/>
 
 </android.support.constraint.ConstraintLayout>

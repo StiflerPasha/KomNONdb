@@ -1,6 +1,8 @@
 package com.deadlock.komnondb;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             sumHW, sumCW, sumWof, sumEl, prevMonth, presMonth;
 
     Button btnResult;
+    ImageButton btnPrev, btnNext;
 
     EditText hwPr, cwPr, t1Pr, t2Pr, t3Pr, hw, cw, t1, t2, t3;
 
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Calendar calendar = Calendar.getInstance();
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+    int month = calendar.get(Calendar.MONTH);
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -88,6 +93,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnResult.setOnClickListener(this);
         btnResult.setText(result);
 
+        btnPrev = findViewById(R.id.btnPrev);
+        btnPrev.setOnClickListener(this);
+        btnNext = findViewById(R.id.btnNext);
+        btnNext.setOnClickListener(this);
+
         hwPr = findViewById(R.id.etHWpr);
         cwPr = findViewById(R.id.etCWpr);
         t1Pr = findViewById(R.id.etT1pr);
@@ -109,8 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         HOUSE_KEF = Float.parseFloat(sp.getString("houseSet", "35000.0"));
         PERSONS_KEF = Integer.parseInt(sp.getString("personsSet", "3"));
 
-        presMonth.setText(monthNames[calendar.get(Calendar.MONTH)]);
-        prevMonth.setText(monthNames[calendar.get(Calendar.MONTH) - 1]);
+        presMonth.setText(monthNames[month]);
+        prevMonth.setText(monthNames[month - 1]);
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid()));
@@ -118,11 +128,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setCounters();
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case (R.id.btnResult):
+                if (etEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Заполните все поля!", Toast.LENGTH_LONG).show();
 
-        if (TextUtils.isEmpty(hwPr.getText().toString()) ||
+                } else if (month == calendar.get(Calendar.MONTH)) {
+                    btnPrev.setVisibility(View.INVISIBLE);
+                    btnNext.setVisibility(View.INVISIBLE);
+                    calculate();
+                    savePresCounter();
+                    savePrevCounter();
+                    saveResults();
+                } else {
+                    calculate();
+                }
+                break;
+
+            case (R.id.btnPrev):
+                clearText();
+                month--;
+                prevMonth.setText(monthNames[month - 1]);
+                presMonth.setText(monthNames[month]);
+                setCounters();
+                break;
+                
+            case (R.id.btnNext):
+                clearText();
+                month++;
+                prevMonth.setText(monthNames[month - 1]);
+                presMonth.setText(monthNames[month]);
+                setCounters();
+                break;
+        }
+    }
+
+    private void clearText() {
+        textResultHW.setText("");
+        textResultCW.setText("");
+        textResultWof.setText("");
+        textResultElectr.setText("");
+        textResultAll.setText("");
+        textPersonal.setText("");
+        litrHW.setText("");
+        litrCW.setText("");
+        litrWof.setText("");
+        litrEl.setText("");
+        sumHW.setText("");
+        sumCW.setText("");
+        sumWof.setText("");
+        sumEl.setText("");
+    }
+
+    private boolean etEmpty() {
+        return TextUtils.isEmpty(hwPr.getText().toString()) ||
                 TextUtils.isEmpty(hw.getText().toString()) ||
                 TextUtils.isEmpty(cwPr.getText().toString()) ||
                 TextUtils.isEmpty(cw.getText().toString()) ||
@@ -131,86 +192,78 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 TextUtils.isEmpty(t2Pr.getText().toString()) ||
                 TextUtils.isEmpty(t2.getText().toString()) ||
                 TextUtils.isEmpty(t3Pr.getText().toString()) ||
-                TextUtils.isEmpty(t3.getText().toString())) {
-            Toast.makeText(getApplicationContext(), "Заполните все поля!", Toast.LENGTH_LONG).show();
+                TextUtils.isEmpty(t3.getText().toString());
+    }
 
-        } else {
+    @SuppressLint("SetTextI18n")
+    private void calculate() {
+        int hw1 = Integer.parseInt(hwPr.getText().toString());
+        int hw2 = Integer.parseInt(hw.getText().toString());
+        int resHW = hw2 - hw1;
+        float resultHW = resHW * HW_KEF;
+        BigDecimal hw = new BigDecimal(resultHW);
+        hw = hw.setScale(2, BigDecimal.ROUND_HALF_UP);
+        textResultHW.setText("Горячая вода:");
+        litrHW.setText(resHW + "л");
+        sumHW.setText(hw + " руб");
+        hwRes = (float) Math.round(resultHW * 100) / 100;
+        hwToDb = resHW;
 
-            int hw1 = Integer.parseInt(hwPr.getText().toString());
-            int hw2 = Integer.parseInt(hw.getText().toString());
-            int resHW = hw2 - hw1;
-            float resultHW = resHW * HW_KEF;
-            BigDecimal hw = new BigDecimal(resultHW);
-            hw = hw.setScale(2, BigDecimal.ROUND_HALF_UP);
-            textResultHW.setText("Горячая вода:");
-            litrHW.setText(resHW + "л");
-            sumHW.setText(hw + " руб");
-            hwRes = (float) Math.round(resultHW * 100) / 100;
-            hwToDb = resHW;
+        int cw1 = Integer.parseInt(cwPr.getText().toString());
+        int cw2 = Integer.parseInt(cw.getText().toString());
+        int resCW = cw2 - cw1;
+        float resultCW = resCW * CW_KEF;
+        BigDecimal cw = new BigDecimal(resultCW);
+        cw = cw.setScale(2, BigDecimal.ROUND_HALF_UP);
+        textResultCW.setText("Холодная вода:");
+        litrCW.setText(resCW + "л");
+        sumCW.setText(cw + " руб");
+        cwRes = (float) Math.round(resultCW * 100) / 100;
+        cwToDb = resCW;
 
-            int cw1 = Integer.parseInt(cwPr.getText().toString());
-            int cw2 = Integer.parseInt(cw.getText().toString());
-            int resCW = cw2 - cw1;
-            float resultCW = resCW * CW_KEF;
-            BigDecimal cw = new BigDecimal(resultCW);
-            cw = cw.setScale(2, BigDecimal.ROUND_HALF_UP);
-            textResultCW.setText("Холодная вода:");
-            litrCW.setText(resCW + "л");
-            sumCW.setText(cw + " руб");
-            cwRes = (float) Math.round(resultCW * 100) / 100;
-            cwToDb = resCW;
+        int resWof = (hw2 - hw1) + (cw2 - cw1);
+        float resultWof = resWof * WOF_KEF;
+        BigDecimal wof = new BigDecimal(resultWof);
+        wof = wof.setScale(2, BigDecimal.ROUND_HALF_UP);
+        textResultWof.setText("Водоотвод:");
+        litrWof.setText(resWof + "л");
+        sumWof.setText(wof + " руб");
+        wofRes = (float) Math.round(resultWof * 100) / 100;
+        wofToDb = resWof;
 
-            int resWof = (hw2 - hw1) + (cw2 - cw1);
-            float resultWof = resWof * WOF_KEF;
-            BigDecimal wof = new BigDecimal(resultWof);
-            wof = wof.setScale(2, BigDecimal.ROUND_HALF_UP);
-            textResultWof.setText("Водоотвод:");
-            litrWof.setText(resWof + "л");
-            sumWof.setText(wof + " руб");
-            wofRes = (float) Math.round(resultWof * 100) / 100;
-            wofToDb = resWof;
+        int elPr1 = Integer.parseInt(t1Pr.getText().toString());
+        int el1 = Integer.parseInt(t1.getText().toString());
+        int resT1 = el1 - elPr1;
+        float resultT1 = resT1 * T1_KEF;
 
-            int elPr1 = Integer.parseInt(t1Pr.getText().toString());
-            int el1 = Integer.parseInt(t1.getText().toString());
-            int resT1 = el1 - elPr1;
-            float resultT1 = resT1 * T1_KEF;
+        int elPr2 = Integer.parseInt(t2Pr.getText().toString());
+        int el2 = Integer.parseInt(t2.getText().toString());
+        int resT2 = el2 - elPr2;
+        float resultT2 = resT2 * T2_KEF;
 
-            int elPr2 = Integer.parseInt(t2Pr.getText().toString());
-            int el2 = Integer.parseInt(t2.getText().toString());
-            int resT2 = el2 - elPr2;
-            float resultT2 = resT2 * T2_KEF;
+        int elPr3 = Integer.parseInt(t3Pr.getText().toString());
+        int el3 = Integer.parseInt(t3.getText().toString());
+        int resT3 = el3 - elPr3;
+        float resultT3 = resT3 * T3_KEF;
 
-            int elPr3 = Integer.parseInt(t3Pr.getText().toString());
-            int el3 = Integer.parseInt(t3.getText().toString());
-            int resT3 = el3 - elPr3;
-            float resultT3 = resT3 * T3_KEF;
+        float resultElectr = resultT1 + resultT2 + resultT3;
+        BigDecimal el = new BigDecimal(resultElectr);
+        el = el.setScale(2, BigDecimal.ROUND_HALF_UP);
+        textResultElectr.setText("Электричество:");
+        litrEl.setText(resT1 + "|" + resT2 + "|" + resT3);
+        sumEl.setText(el + " руб");
+        elRes = (float) Math.round(resultElectr * 100) / 100;
 
-            float resultElectr = resultT1 + resultT2 + resultT3;
-            BigDecimal el = new BigDecimal(resultElectr);
-            el = el.setScale(2, BigDecimal.ROUND_HALF_UP);
-            textResultElectr.setText("Электричество:");
-            litrEl.setText(resT1 + "|" + resT2 + "|" + resT3);
-            sumEl.setText(el + " руб");
-            elRes = (float) Math.round(resultElectr * 100) / 100;
+        float resultAll = resultHW + resultCW + resultElectr + resultWof + PHONE_KEF;
+        BigDecimal all = new BigDecimal(resultAll);
+        all = all.setScale(2, BigDecimal.ROUND_HALF_UP);
+        textResultAll.setText(all + " руб");
+        allRes = (float) Math.round(resultAll * 100) / 100;
 
-            float resultAll = resultHW + resultCW + resultElectr + resultWof + PHONE_KEF;
-            BigDecimal all = new BigDecimal(resultAll);
-            all = all.setScale(2, BigDecimal.ROUND_HALF_UP);
-            textResultAll.setText(all + " руб");
-            allRes = (float) Math.round(resultAll * 100) / 100;
-
-            float peronal = (resultAll + HOUSE_KEF) / PERSONS_KEF;
-            BigDecimal pers = new BigDecimal(peronal);
-            pers = pers.setScale(2, BigDecimal.ROUND_HALF_UP);
-            textPersonal.setText(pers + " руб");
-
-            savePresCounter();
-            savePrevCounter();
-
-            saveResults();
-
-            //btnResult.setText(exit);
-        }
+        float peronal = (resultAll + HOUSE_KEF) / PERSONS_KEF;
+        BigDecimal pers = new BigDecimal(peronal);
+        pers = pers.setScale(2, BigDecimal.ROUND_HALF_UP);
+        textPersonal.setText(pers + " руб");
     }
 
     private void savePresCounter() {

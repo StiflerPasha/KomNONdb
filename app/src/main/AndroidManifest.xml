@@ -12,6 +12,9 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1175513512164565~6868132934"/>
         <activity
             android:name=".EmailPassword"
             android:screenOrientation="portrait">

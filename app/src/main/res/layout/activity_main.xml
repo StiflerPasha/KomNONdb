@@ -33,6 +33,7 @@
         android:textAlignment="center"
         android:textColor="@android:color/darker_gray"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/etT1pr"
         app:layout_constraintStart_toStartOf="@+id/etT1pr"
         app:layout_constraintTop_toBottomOf="@+id/prevMonth" />
 
@@ -46,6 +47,7 @@
         android:textColor="@android:color/darker_gray"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/etT3pr"
+        app:layout_constraintStart_toStartOf="@+id/etT3pr"
         app:layout_constraintTop_toBottomOf="@+id/prevMonth" />
 
     <EditText
@@ -53,16 +55,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#95bed3"
+        android:background="@drawable/rounded_all"
         android:ems="4"
         android:hint="@string/HW"
         android:inputType="number"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#8b0000"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/etT1pr"
+        app:layout_constraintStart_toStartOf="@+id/etT1pr"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
@@ -70,15 +72,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#95bed3"
+        android:background="@drawable/rounded_all"
         android:ems="4"
         android:hint="@string/CW"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="#8b0000"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/etT3pr"
+        app:layout_constraintStart_toStartOf="@+id/etT3pr"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
@@ -98,13 +100,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#95bed3"
+        android:background="@drawable/rounded_all"
         android:ems="4"
         android:hint="@string/t1"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="#8b0000"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/etT2pr"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -114,13 +116,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#95bed3"
+        android:background="@drawable/rounded_all"
         android:ems="4"
         android:hint="@string/t2"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="#8b0000"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -130,13 +132,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#95bed3"
+        android:background="@drawable/rounded_all"
         android:ems="4"
         android:hint="@string/t3"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="#8b0000"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etT2pr"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -166,8 +168,8 @@
         android:textAlignment="center"
         android:textColor="@android:color/darker_gray"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/etT1"
+        app:layout_constraintStart_toStartOf="@+id/etT1"
         app:layout_constraintTop_toBottomOf="@+id/presMonth" />
 
     <TextView
@@ -179,8 +181,8 @@
         android:textAlignment="center"
         android:textColor="@android:color/darker_gray"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="@+id/etT3"
+        app:layout_constraintStart_toStartOf="@+id/etT3"
         app:layout_constraintTop_toBottomOf="@+id/presMonth" />
 
     <EditText
@@ -188,13 +190,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#95bed3"
+        android:background="@drawable/rounded_all"
         android:ems="4"
         android:hint="@string/t1"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="#4c7100"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/etT1pr"
         app:layout_constraintStart_toStartOf="@+id/etT1pr"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -204,13 +206,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#95bed3"
+        android:background="@drawable/rounded_all"
         android:ems="4"
         android:hint="@string/t2"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="#4c7100"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/etT2pr"
         app:layout_constraintStart_toStartOf="@+id/etT2pr"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -220,13 +222,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#95bed3"
+        android:background="@drawable/rounded_all"
         android:ems="4"
         android:hint="@string/t3"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="#4c7100"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/etT3pr"
         app:layout_constraintStart_toStartOf="@+id/etT3pr"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -236,15 +238,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#95bed3"
+        android:background="@drawable/rounded_all"
         android:ems="4"
         android:hint="@string/HW"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="#4c7100"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView10"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/etT1"
+        app:layout_constraintStart_toStartOf="@+id/etT1"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <EditText
@@ -252,15 +254,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#95bed3"
+        android:background="@drawable/rounded_all"
         android:ems="4"
         android:hint="@string/CW"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="#4c7100"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView11"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/etT3"
+        app:layout_constraintStart_toStartOf="@+id/etT3"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView

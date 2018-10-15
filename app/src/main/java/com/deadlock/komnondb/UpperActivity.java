@@ -30,6 +30,9 @@ public class UpperActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upper);
 
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid()));
+
         MobileAds.initialize(this,"ca-app-pub-1175513512164565~6868132934");
 
         mAdView = findViewById(R.id.adView);
@@ -45,9 +48,6 @@ public class UpperActivity extends AppCompatActivity implements View.OnClickList
         btnTable.setOnClickListener(this);
         btnExit = findViewById(R.id.btnExit);
         btnExit.setOnClickListener(this);
-
-        database = FirebaseDatabase.getInstance();
-        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid()));
     }
 
     @Override

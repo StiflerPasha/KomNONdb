@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 prevMonth.setText(monthNames[month - 1]);
                 presMonth.setText(monthNames[month]);
                 setCounters();
+                calculate();
                 break;
                 
             case (R.id.btnNext):
@@ -159,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 prevMonth.setText(monthNames[month - 1]);
                 presMonth.setText(monthNames[month]);
                 setCounters();
+                calculate();
                 break;
         }
     }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KomNONdb</string>
+    <string name="app_name">Komunalka</string>
     <string name="textPrev">Предыдущий месяц</string>
     <string name="textPres">Текущий меcяц</string>
     <string name="textHW">Горячая вода</string>

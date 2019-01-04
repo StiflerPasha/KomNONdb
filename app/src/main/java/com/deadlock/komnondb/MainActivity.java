@@ -118,12 +118,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         PERSONS_KEF = Integer.parseInt(sp.getString("personsSet", "3"));
 
         presMonth.setText(monthNames[month]);
-        prevMonth.setText(monthNames[month - 1]);
+
+        if (month == 0) {
+            prevMonth.setText(monthNames[11]);
+        } else {
+            prevMonth.setText(monthNames[month - 1]);
+        }
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid()));
 
         setCounters();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid()));
+
     }
 
     @Override
@@ -148,16 +161,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case (R.id.btnPrev):
                 clearText();
                 month--;
-                prevMonth.setText(monthNames[month - 1]);
-                presMonth.setText(monthNames[month]);
+                if (month == 0) {
+                    presMonth.setText(monthNames[month]);
+                    prevMonth.setText(monthNames[11]);
+                } else if (month < 0) {
+                    month = 11;
+                    presMonth.setText(monthNames[month]);
+                    prevMonth.setText(monthNames[month - 1]);
+                } else {
+                    presMonth.setText(monthNames[month]);
+                    prevMonth.setText(monthNames[month - 1]);
+                }
                 setCounters();
                 break;
                 
             case (R.id.btnNext):
                 clearText();
                 month++;
-                prevMonth.setText(monthNames[month - 1]);
-                presMonth.setText(monthNames[month]);
+                if (month == 11) {
+                    presMonth.setText(monthNames[month]);
+                    prevMonth.setText(monthNames[month - 1]);
+                } else if (month > 11) {
+                    month = 0;
+                    presMonth.setText(monthNames[month]);
+                    prevMonth.setText(monthNames[11]);
+                } else {
+                    presMonth.setText(monthNames[month]);
+                    prevMonth.setText(monthNames[month - 1]);
+                }
                 setCounters();
                 break;
         }
